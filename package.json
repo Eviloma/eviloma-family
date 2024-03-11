@@ -15,6 +15,8 @@
     "defaults and not dead and not op_mini all"
   ],
   "dependencies": {
+    "@logto/next": "^3.1.0",
+    "@logto/node": "^2.4.0",
     "@mantine/charts": "^7.6.1",
     "@mantine/core": "^7.6.1",
     "@mantine/dates": "^7.6.1",
