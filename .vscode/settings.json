@@ -50,5 +50,8 @@
   "[yaml]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "prettier.enable": false
+  "prettier.enable": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  }
 }
