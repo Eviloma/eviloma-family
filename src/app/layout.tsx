@@ -1,8 +1,12 @@
 import './globals.css';
+import '@mantine/core/styles.css';
 
+import { MantineProvider } from '@mantine/core';
 import { type Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 import React from 'react';
+
+import theme from '@/utils/theme';
 
 const raleway = Raleway({ subsets: ['cyrillic-ext'] });
 
@@ -11,10 +15,14 @@ export const metadata: Metadata = {
   title: 'Create Next App',
 };
 
-export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
-      <body className={raleway.className}>{children}</body>
+    <html lang='uk'>
+      <body className={raleway.className}>
+        <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark'>
+          {children}
+        </MantineProvider>
+      </body>
     </html>
   );
 }
