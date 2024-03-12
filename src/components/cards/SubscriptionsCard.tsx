@@ -1,13 +1,33 @@
 'use client';
 
-import { Card, Divider, GridCol, Stack } from '@mantine/core';
+import { Card, Divider, GridCol, Skeleton, Stack } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import { Boxes } from 'lucide-react';
 import React from 'react';
+
+import getUser from '@/store/get-user';
+import User from '@/types/user';
 
 import CardTitle from './items/CardTitle';
 import SubscriptionItem from './items/SubscriptionItem';
 
 export default function SubscriptionsCard() {
+  const { data, isLoading } = useQuery<User>({ queryKey: ['user'], queryFn: getUser });
+
+  if (isLoading || !data) {
+    return (
+      <GridCol
+        span={{
+          base: 12,
+          md: 6,
+          lg: 4,
+        }}
+      >
+        <Skeleton radius='md' h='100%' mih='250px' />
+      </GridCol>
+    );
+  }
+
   return (
     <GridCol
       span={{

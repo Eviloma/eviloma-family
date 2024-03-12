@@ -7,6 +7,7 @@ import { Raleway } from 'next/font/google';
 import React from 'react';
 
 import NavBar from '@/components/navbar/NavBar';
+import ReactQueryProvider from '@/components/ReactQueryProvider';
 import theme from '@/utils/theme';
 
 const raleway = Raleway({ subsets: ['cyrillic-ext', 'latin-ext'] });
@@ -23,10 +24,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ColorSchemeScript defaultColorScheme='dark' forceColorScheme='dark' />
       </head>
       <body className={raleway.className}>
-        <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark' withGlobalClasses>
-          <NavBar />
-          {children}
-        </MantineProvider>
+        <ReactQueryProvider>
+          <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark' withGlobalClasses>
+            <NavBar />
+            {children}
+          </MantineProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -14,7 +14,7 @@ export const users = pgTable('users', {
 });
 
 export const subscriptions = pgTable('subscriptions', {
-  id: text('id').primaryKey().unique().notNull(),
+  id: uuid('id').primaryKey().unique().notNull().defaultRandom(),
   title: text('title').notNull().unique(),
   category: subscriptionCategories('category').notNull().default('Other'),
   cost: integer('cost').notNull(),
@@ -25,7 +25,7 @@ export const transactions = pgTable('transactions', {
   id: uuid('id').primaryKey().unique().notNull().defaultRandom(),
   user: text('user')
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' }),
   title: text('title').notNull(),
   category: transactionCategories('category').notNull().default('Other'),
   suma: integer('suma').notNull(),
@@ -36,7 +36,7 @@ export const telegramLinkTokens = pgTable('telegram_link_tokens', {
   id: uuid('id').primaryKey().unique().notNull().defaultRandom(),
   user: text('user')
     .notNull()
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
     .unique(),
   token: text('token').unique().notNull(),
   validUntil: timestamp('valid_until').default(sql`now() + INTERVAL '15 minutes'`),
@@ -45,8 +45,12 @@ export const telegramLinkTokens = pgTable('telegram_link_tokens', {
 export const userOnSubscriptions = pgTable(
   'user_subscriptions',
   {
-    userId: text('user_id').references(() => users.id),
-    subscriptionId: text('subscription_id').references(() => subscriptions.id),
+    userId: text('user_id')
+      .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
+      .notNull(),
+    subscriptionId: uuid('subscription_id')
+      .references(() => subscriptions.id, { onDelete: 'cascade', onUpdate: 'cascade' })
+      .notNull(),
   },
   (t) => ({
     pk: primaryKey({ columns: [t.userId, t.subscriptionId] }),

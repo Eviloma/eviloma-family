@@ -1,13 +1,32 @@
 'use client';
 
-import { ActionIcon, Card, Divider, GridCol, Stack, Tooltip } from '@mantine/core';
+import { ActionIcon, Card, Divider, GridCol, Skeleton, Stack, Tooltip } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import { FileStack, ReceiptText } from 'lucide-react';
 import React from 'react';
+
+import getUser from '@/store/get-user';
+import User from '@/types/user';
 
 import CardTitle from './items/CardTitle';
 import TransactionItem from './items/TransactionItem';
 
 export default function TransactionsCard() {
+  const { data, isLoading } = useQuery<User>({ queryKey: ['user'], queryFn: getUser });
+
+  if (isLoading || !data) {
+    return (
+      <GridCol
+        span={{
+          base: 12,
+          md: 6,
+          lg: 4,
+        }}
+      >
+        <Skeleton radius='md' h='100%' mih='250px' />
+      </GridCol>
+    );
+  }
   return (
     <GridCol
       span={{

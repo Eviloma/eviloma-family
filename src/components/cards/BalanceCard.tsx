@@ -1,13 +1,32 @@
 'use client';
 
-import { Button, Card, GridCol, NumberFormatter, Stack, Text } from '@mantine/core';
+import { Button, Card, GridCol, NumberFormatter, Skeleton, Stack, Text } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import { Coins, CreditCard } from 'lucide-react';
 import React from 'react';
+
+import getUser from '@/store/get-user';
+import User from '@/types/user';
 
 import CardTitle from './items/CardTitle';
 
 export default function BalanceCard() {
-  const balance = -1000;
+  const { data, isLoading } = useQuery<User>({ queryKey: ['user'], queryFn: getUser });
+
+  if (isLoading || !data) {
+    return (
+      <GridCol
+        span={{
+          base: 12,
+          md: 6,
+          lg: 4,
+        }}
+      >
+        <Skeleton radius='md' h='100%' />
+      </GridCol>
+    );
+  }
+
   return (
     <GridCol
       span={{
@@ -23,8 +42,14 @@ export default function BalanceCard() {
 
         <Stack gap='md' mt='md' justify='space-between' h='100%'>
           <Stack gap='sm' my='auto'>
-            <Text size='36px' ta='center' fw={600} c={balance < 0 ? 'red' : ''}>
-              <NumberFormatter suffix=' ₴' value={balance} thousandSeparator=' ' decimalScale={2} fixedDecimalScale />
+            <Text size='36px' ta='center' fw={600} c={data.balance < 0 ? 'red' : ''}>
+              <NumberFormatter
+                suffix=' ₴'
+                value={data.balance}
+                thousandSeparator=' '
+                decimalScale={2}
+                fixedDecimalScale
+              />
             </Text>
 
             <Text ta='center' c='dimmed' size='sm'>

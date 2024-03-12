@@ -39,6 +39,7 @@ module.exports = {
 
     // Others
     'plugin:jsonc/base',
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   plugins: ['lodash', 'json-format', 'no-secrets', 'simple-import-sort', 'unused-imports'],
   root: true,
