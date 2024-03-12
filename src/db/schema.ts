@@ -3,13 +3,11 @@ import { integer, pgEnum, pgTable, primaryKey, text, timestamp, uuid } from 'dri
 
 import { SubscriptionCategories, TransactionCategories } from '@/utils/consts';
 
-export const roles = pgEnum('roles', ['default', 'admin', 'superadmin']);
 export const subscriptionCategories = pgEnum('subscription_categories', SubscriptionCategories);
 export const transactionCategories = pgEnum('transaction_categories', TransactionCategories);
 
 export const users = pgTable('users', {
   id: text('id').primaryKey().unique().notNull(),
-  role: roles('role').notNull().default('default'),
   balance: integer('balance').default(0).notNull(),
   paymentLink: text('payment_link'),
   telegramID: text('telegram_id').unique(),

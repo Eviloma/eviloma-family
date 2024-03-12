@@ -1,5 +1,5 @@
 {
-  "id": "83742cea-7d8d-4a30-95fc-bcb22037139b",
+  "id": "b5afff8e-5698-4293-9177-2b9a211c969a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -239,13 +239,6 @@
           "primaryKey": true,
           "notNull": true
         },
-        "role": {
-          "name": "role",
-          "type": "roles",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'default'"
-        },
         "balance": {
           "name": "balance",
           "type": "integer",
@@ -284,14 +277,6 @@
     }
   },
   "enums": {
-    "roles": {
-      "name": "roles",
-      "values": {
-        "default": "default",
-        "admin": "admin",
-        "superadmin": "superadmin"
-      }
-    },
     "subscription_categories": {
       "name": "subscription_categories",
       "values": {

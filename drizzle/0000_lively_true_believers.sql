@@ -1,10 +1,4 @@
 DO $$ BEGIN
- CREATE TYPE "roles" AS ENUM('default', 'admin', 'superadmin');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
  CREATE TYPE "subscription_categories" AS ENUM('Other', 'Youtube', 'Spotify');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -54,7 +48,6 @@ CREATE TABLE IF NOT EXISTS "user_subscriptions" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" text PRIMARY KEY NOT NULL,
-	"role" "roles" DEFAULT 'default' NOT NULL,
 	"balance" integer DEFAULT 0 NOT NULL,
 	"payment_link" text,
 	"telegram_id" text,

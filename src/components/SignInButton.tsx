@@ -1,13 +1,16 @@
-// ! Only For test
-
 'use client';
 
+import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { signIn } from '@/utils/logto';
 
-function SignIn() {
+interface IProps {
+  label?: string;
+}
+
+export default function SignInButton({ label }: IProps) {
   const router = useRouter();
 
   const handleClick = async () => {
@@ -16,11 +19,5 @@ function SignIn() {
     router.push(redirectUrl);
   };
 
-  return (
-    <button type='button' onClick={handleClick}>
-      Sign In
-    </button>
-  );
+  return <Button onClick={handleClick}>{label ?? 'Увійти'}</Button>;
 }
-
-export default SignIn;

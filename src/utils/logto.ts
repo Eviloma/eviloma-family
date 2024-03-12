@@ -1,8 +1,7 @@
 'use server';
 
-import { UserScope } from '@logto/next';
 import LogtoClient from '@logto/next/server-actions';
-import { GetContextParameters } from '@logto/node';
+import { GetContextParameters, UserScope } from '@logto/node';
 import { cookies } from 'next/headers';
 
 import { env } from '@/env';
@@ -11,11 +10,10 @@ const config = {
   appId: env.LOGTO_APP_ID,
   appSecret: env.LOGTO_APP_SECRET,
   endpoint: env.LOGTO_ENDPOINT,
-  baseUrl: env.VERCEL_URL ?? 'http://localhost:3000',
+  baseUrl: env.VERCEL_URL ?? env.BASE_URL,
   cookieSecret: env.LOGTO_COOKIE_SECRET,
   cookieSecure: env.NODE_ENV === 'production',
-  scopes: [UserScope.Profile, UserScope.Roles, UserScope.Organizations, 'write:admin'],
-  resources: ['http://localhost:3000/api'],
+  scopes: [UserScope.Email],
 };
 
 const logtoClient = new LogtoClient(config);
@@ -62,5 +60,5 @@ export const signOut = async () => {
 };
 
 export const getLogtoContext = async (configs?: GetContextParameters) => {
-  return logtoClient.getLogtoContext(getCookie(), configs);
+  return logtoClient.getLogtoContext(getCookie(), { resource: `${config.baseUrl}/api`, ...configs });
 };
