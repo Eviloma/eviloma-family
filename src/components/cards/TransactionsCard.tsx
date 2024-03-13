@@ -5,14 +5,20 @@ import { useQuery } from '@tanstack/react-query';
 import { FileStack, ReceiptText } from 'lucide-react';
 import React from 'react';
 
-import getUser from '@/store/get-user';
 import User from '@/types/user';
+import QueryRequest from '@/utils/query-request';
 
 import CardTitle from './items/CardTitle';
 import TransactionItem from './items/TransactionItem';
 
 export default function TransactionsCard() {
-  const { data, isLoading } = useQuery<User>({ queryKey: ['user'], queryFn: getUser });
+  const { data, isLoading } = useQuery<User>({
+    queryKey: ['user'],
+    queryFn: () =>
+      QueryRequest({
+        link: '/api/user',
+      }),
+  });
 
   if (isLoading || !data) {
     return (

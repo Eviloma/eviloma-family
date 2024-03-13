@@ -19,8 +19,12 @@ export const env = createEnv({
       .optional()
       .default('http://localhost:3000'),
   },
-  client: {},
-  experimental__runtimeEnv: {},
+  client: {
+    NEXT_PUBLIC_TELEGRAM_BOT_LINK: z.string().url('NEXT_PUBLIC_TELEGRAM_BOT_LINK must be a valid URL'),
+  },
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_TELEGRAM_BOT_LINK: process.env.NEXT_PUBLIC_TELEGRAM_BOT_LINK,
+  },
   emptyStringAsUndefined: true,
   extends: [vercel],
   onValidationError: (error: ZodError) => {

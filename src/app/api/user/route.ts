@@ -3,14 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import db from '@/db';
 import { users } from '@/db/schema';
+import API from '@/types/api';
+import User from '@/types/user';
 import ApiErrorHandler from '@/utils/api/api-error-handler';
 import FetchUserInfo from '@/utils/api/authorization-check';
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest): API<User> {
   try {
     const userInfo = await FetchUserInfo();
 
-    const userExists = !!(await db.query.users.findFirst({}));
+    const userExists = !!(await db.query.users.findFirst({ where: eq(users.id, userInfo.sub) }));
 
     if (!userExists) {
       await db.insert(users).values({
@@ -22,6 +24,7 @@ export async function GET(req: NextRequest) {
       where: eq(users.id, userInfo.sub),
       with: {
         subscriptions: {
+          columns: {},
           with: {
             subscription: true,
           },
@@ -32,12 +35,15 @@ export async function GET(req: NextRequest) {
       },
     });
 
+    if (!user) {
+      throw new Error('Unknown error');
+    }
+
     return NextResponse.json({
       ...user,
       email: userInfo.email!,
       username: userInfo.username ?? null,
       avatar: userInfo.picture ?? null,
-      balance: user!.balance / 100,
     });
   } catch (error) {
     return ApiErrorHandler(req, error);

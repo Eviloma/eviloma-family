@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 
-export class ApiError extends Error {
+export class ApiErrorClass extends Error {
   code: StatusCodes;
 
   error_code: string;
@@ -12,9 +12,9 @@ export class ApiError extends Error {
   }
 }
 
-const ErrorFetchingUserInfo = new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'error_fetching_user_info');
-const UnauthorizedError = new ApiError(StatusCodes.UNAUTHORIZED, 'unauthorized');
-const ForbiddenError = new ApiError(StatusCodes.FORBIDDEN, 'forbidden');
-const NotFoundError = new ApiError(StatusCodes.NOT_FOUND, 'not_found');
+const ErrorFetchingUserInfo = new ApiErrorClass(StatusCodes.INTERNAL_SERVER_ERROR, 'error_fetching_user_info');
+const UnauthorizedError = new ApiErrorClass(StatusCodes.UNAUTHORIZED, 'unauthorized');
+const ForbiddenError = new ApiErrorClass(StatusCodes.FORBIDDEN, 'forbidden');
+const NotFoundError = new ApiErrorClass(StatusCodes.NOT_FOUND, 'not_found');
 
 export { ErrorFetchingUserInfo, ForbiddenError, NotFoundError, UnauthorizedError };

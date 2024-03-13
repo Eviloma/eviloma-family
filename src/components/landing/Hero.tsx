@@ -1,4 +1,5 @@
 import { Button, Stack, Text, Title } from '@mantine/core';
+import Link from 'next/link';
 import React from 'react';
 
 import { getLogtoContext } from '@/utils/logto';
@@ -16,7 +17,13 @@ export default async function Hero() {
         Ваш персональний помічник у керуванні підписками. Забудьте про зайві витрати та заплутані рахунки - з нами ви
         контролюєте всі ваші підписки в одному місці. Просто, зручно.
       </Text>
-      {isAuthenticated ? <Button>Перейти</Button> : <SignInButton label='Розпочати' />}
+      {isAuthenticated ? (
+        <Button component={Link} href='/dashboard'>
+          Перейти
+        </Button>
+      ) : (
+        <SignInButton label='Розпочати' />
+      )}
     </Stack>
   );
 }

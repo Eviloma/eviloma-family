@@ -1,11 +1,14 @@
 import './globals.css';
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { type Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 import React from 'react';
 
+import LogtoErrorNotificator from '@/components/LogtoErrorNotificator';
 import NavBar from '@/components/navbar/NavBar';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
 import theme from '@/utils/theme';
@@ -26,6 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={raleway.className}>
         <ReactQueryProvider>
           <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark' withGlobalClasses>
+            <Notifications position='top-right' />
+            <LogtoErrorNotificator />
             <NavBar />
             {children}
           </MantineProvider>

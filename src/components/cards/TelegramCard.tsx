@@ -1,19 +1,27 @@
 'use client';
 
-import { ActionIcon, Avatar, Button, Card, GridCol, Group, Skeleton, Stack, Text, Tooltip } from '@mantine/core';
+import { ActionIcon, Avatar, Card, GridCol, Group, Skeleton, Stack, Text, Tooltip } from '@mantine/core';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Link, RefreshCcw, Unlink } from 'lucide-react';
+import { RefreshCcw } from 'lucide-react';
 import React from 'react';
 
 import TelegramIcon from '@/app/icons/Telegram';
-import getUser from '@/store/get-user';
 import User from '@/types/user';
+import QueryRequest from '@/utils/query-request';
 
 import CardTitle from './items/CardTitle';
+import TelegramLinkButton from './items/TelegramLinkButton';
+import TelegramUnLinkButton from './items/TelegramUnlinkButton';
 
 export default function TelegramCard() {
   const queryClient = useQueryClient();
-  const { data, isLoading, isRefetching } = useQuery<User>({ queryKey: ['user'], queryFn: getUser });
+  const { data, isLoading, isRefetching } = useQuery<User>({
+    queryKey: ['user'],
+    queryFn: () =>
+      QueryRequest({
+        link: '/api/user',
+      }),
+  });
 
   if (isLoading || !data) {
     return (
@@ -66,25 +74,22 @@ export default function TelegramCard() {
               </Group>
             </Stack>
           ) : (
-            <Stack ta='center' className='flex-1 text-balance'>
+            <Stack ta='center' className='flex-1 text-balance' gap='xs'>
               <Text>Ви не прив&#39;язали телеграм бота</Text>
               <Text c='dimmed' size='sm'>
                 Підключіть наш Telegram бот для зручного доступу! Отримуйте сповіщення про оплату, інформацію про
                 баланс, активні підписки, транзакції. Зручна інтеграція, швидкий доступ та персоналізований сервіс
               </Text>
+              <Text c='dimmed' size='sm'>
+                Для прив&apos;язки телеграм, натисніть на кнопку нижче. Для вас буде згенеровано унікальний токен, який
+                буде дійсний на протязі 15 хвилин. Після того як ви натисните кнопку, ви будете перенаправлені в
+                телеграм бота.
+              </Text>
             </Stack>
           )}
 
           <Stack gap='sm' mt='md'>
-            {data.telegramID ? (
-              <Button fullWidth leftSection={<Unlink />} variant='light' color='red'>
-                Відв&#39;язати телеграм бота
-              </Button>
-            ) : (
-              <Button fullWidth leftSection={<Link />} variant='light'>
-                Прив&#39;язати телеграм бота
-              </Button>
-            )}
+            {data.telegramID ? <TelegramUnLinkButton /> : <TelegramLinkButton />}
           </Stack>
         </Stack>
       </Card>

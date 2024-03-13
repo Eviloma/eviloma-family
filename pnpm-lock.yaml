@@ -72,7 +72,7 @@ dependencies:
     specifier: ^0.354.0
     version: 0.354.0(react@18.2.0)
   nanoid:
-    specifier: ^5.0.4
+    specifier: ^5.0.6
     version: 5.0.6
   next:
     specifier: 14.1.3
