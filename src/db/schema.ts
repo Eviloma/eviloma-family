@@ -1,10 +1,10 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, pgEnum, pgTable, primaryKey, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
-import { SubscriptionCategories, TransactionCategories } from '@/utils/consts';
+import { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from '@/utils/consts';
 
-export const subscriptionCategories = pgEnum('subscription_categories', SubscriptionCategories);
-export const transactionCategories = pgEnum('transaction_categories', TransactionCategories);
+export const subscriptionCategories = pgEnum('subscription_categories', SUBSCRIPTION_CATEGORIES);
+export const transactionCategories = pgEnum('transaction_categories', TRANSACTION_CATEGORIES);
 
 export const users = pgTable('users', {
   id: text('id').primaryKey().unique().notNull(),
@@ -17,7 +17,7 @@ export const subscriptions = pgTable('subscriptions', {
   id: uuid('id').primaryKey().unique().notNull().defaultRandom(),
   title: text('title').notNull().unique(),
   category: subscriptionCategories('category').notNull().default('Other'),
-  cost: integer('cost').notNull(),
+  price: integer('price').notNull(),
   date: timestamp('date').notNull(),
 });
 

@@ -1,5 +1,17 @@
+import { Title } from '@mantine/core';
 import React from 'react';
 
+import CreateSubscriptionButton from '@/components/admin/subscriptions/CreateSubscriptionButton';
+import SubscriptionsList from '@/components/admin/subscriptions/SubscriptionsTable';
+
 export default function AdminSubscriptionsPage() {
-  return <div>AdminSubscriptionsPage</div>;
+  return (
+    <>
+      <Title order={2} ta='center' mb='md'>
+        Підписки
+      </Title>
+      <CreateSubscriptionButton />
+      <SubscriptionsList />
+    </>
+  );
 }

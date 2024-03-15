@@ -9,15 +9,15 @@ import db from '@/db';
 import { telegramLinkTokens, users } from '@/db/schema';
 import API from '@/types/api';
 import TelegramPOST from '@/types/telegram-post';
-import ApiErrorHandler from '@/utils/api/api-error-handler';
-import FetchUserInfo from '@/utils/api/authorization-check';
+import apiErrorHandler from '@/utils/api/api-error-handler';
+import fetchUserInfo from '@/utils/api/authorization-check';
 
 // eslint-disable-next-line no-secrets/no-secrets
 const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 16);
 
 export async function POST(req: NextRequest): API<TelegramPOST> {
   try {
-    const userInfo = await FetchUserInfo();
+    const userInfo = await fetchUserInfo();
 
     // Remove old tokens
     await db
@@ -43,19 +43,19 @@ export async function POST(req: NextRequest): API<TelegramPOST> {
       token: newToken[0]?.token,
     });
   } catch (error) {
-    return ApiErrorHandler(req, error);
+    return apiErrorHandler(req, error);
   }
 }
 
 export async function DELETE(req: NextRequest): API<unknown> {
   try {
-    const userInfo = await FetchUserInfo();
+    const userInfo = await fetchUserInfo();
 
     await db.update(users).set({ telegramID: null }).where(eq(users.id, userInfo.sub));
     return NextResponse.json({
       status: 'success',
     });
   } catch (error) {
-    return ApiErrorHandler(req, error);
+    return apiErrorHandler(req, error);
   }
 }

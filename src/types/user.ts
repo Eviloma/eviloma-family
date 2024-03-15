@@ -1,10 +1,12 @@
-import { subscriptions, transactions, users } from '@/db/schema';
+import { transactions, users } from '@/db/schema';
+
+import Subscription from './subscription';
 
 type User = typeof users.$inferSelect & {
   email: string;
   username: string | null;
   avatar: string | null;
-  subscriptions: { subscription: typeof subscriptions.$inferSelect }[];
+  subscriptions: { subscription: Subscription }[];
   transactions: (typeof transactions.$inferSelect)[];
 };
 

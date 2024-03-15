@@ -21,7 +21,7 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
       <Group gap='xs'>
         <Avatar src={image} radius='xl' />
 
-        <div style={{ flex: 1 }}>
+        <div className='flex-1'>
           <Text size='sm' fw={500} maw='125px' truncate>
             {name}
           </Text>

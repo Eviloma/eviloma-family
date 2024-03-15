@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { RefreshCcw } from 'lucide-react';
 import React from 'react';
 
-import TelegramIcon from '@/app/icons/Telegram';
+import TelegramIcon from '@/icons/Telegram';
 import User from '@/types/user';
 import QueryRequest from '@/utils/query-request';
 

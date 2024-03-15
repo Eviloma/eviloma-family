@@ -1,15 +1,21 @@
-import { ErrorFetchingUserInfo, UnauthorizedError } from '@/app/classes/ApiError';
+import { includes } from 'lodash';
+
+import { ErrorFetchingUserInfo, ForbiddenError, UnauthorizedError } from '@/app/classes/ApiError';
 
 import { getLogtoContext } from '../logto';
 
-export default async function FetchUserInfo() {
-  const { isAuthenticated, userInfo } = await getLogtoContext({ fetchUserInfo: true });
+export default async function fetchUserInfo(scope?: string) {
+  const { isAuthenticated, userInfo, scopes } = await getLogtoContext({ fetchUserInfo: true, getAccessToken: true });
   if (!isAuthenticated) {
     throw UnauthorizedError;
   }
 
   if (!userInfo) {
     throw ErrorFetchingUserInfo;
+  }
+
+  if (scope && !includes(scopes, scope)) {
+    throw ForbiddenError;
   }
 
   return userInfo;

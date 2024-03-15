@@ -3,18 +3,21 @@ import { StatusCodes } from 'http-status-codes';
 export class ApiErrorClass extends Error {
   code: StatusCodes;
 
-  error_code: string;
+  detailedMessage?: string;
 
-  constructor(code: StatusCodes, error_code: string) {
-    super(error_code);
+  constructor(code: StatusCodes, message: string, detailedMessage?: string) {
+    super(message);
     this.code = code;
-    this.error_code = error_code;
+    this.detailedMessage = detailedMessage;
   }
 }
 
-const ErrorFetchingUserInfo = new ApiErrorClass(StatusCodes.INTERNAL_SERVER_ERROR, 'error_fetching_user_info');
-const UnauthorizedError = new ApiErrorClass(StatusCodes.UNAUTHORIZED, 'unauthorized');
-const ForbiddenError = new ApiErrorClass(StatusCodes.FORBIDDEN, 'forbidden');
-const NotFoundError = new ApiErrorClass(StatusCodes.NOT_FOUND, 'not_found');
+const ErrorFetchingUserInfo = new ApiErrorClass(
+  StatusCodes.INTERNAL_SERVER_ERROR,
+  'Не вдалось завантажити інформацію про користувача'
+);
+const UnauthorizedError = new ApiErrorClass(StatusCodes.UNAUTHORIZED, 'Не авторизовано');
+const ForbiddenError = new ApiErrorClass(StatusCodes.FORBIDDEN, 'Доступ заборонено');
+const NotFoundError = new ApiErrorClass(StatusCodes.NOT_FOUND, 'Не знайдено');
 
 export { ErrorFetchingUserInfo, ForbiddenError, NotFoundError, UnauthorizedError };

@@ -7,7 +7,7 @@ import SignInButton from '../SignInButton';
 import NavBarMenu from './NavBarMenu';
 
 export default async function NavBar() {
-  const { isAuthenticated, userInfo } = await getLogtoContext({ fetchUserInfo: true });
+  const { isAuthenticated, userInfo, scopes } = await getLogtoContext({ fetchUserInfo: true, getAccessToken: true });
   return (
     <Group align='center' justify='space-between' wrap='nowrap' w='100%' mih='70px'>
       <Title textWrap='nowrap' size='h3' order={1}>
@@ -15,7 +15,7 @@ export default async function NavBar() {
       </Title>
       <Group gap='4px' align='center' wrap='nowrap'>
         {isAuthenticated && userInfo && (
-          <NavBarMenu name={userInfo.name} email={userInfo.email!} avatar={userInfo.picture} />
+          <NavBarMenu username={userInfo.username} email={userInfo.email!} avatar={userInfo.picture} scopes={scopes} />
         )}
         {!isAuthenticated && <SignInButton />}
       </Group>

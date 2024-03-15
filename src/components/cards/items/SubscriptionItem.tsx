@@ -1,7 +1,7 @@
 import { Box, Flex, Group, NumberFormatter, Paper, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
 
-import YoutubeIcon from '@/app/icons/Youtube';
+import YoutubeIcon from '@/icons/Youtube';
 
 export default function SubscriptionItem() {
   return (

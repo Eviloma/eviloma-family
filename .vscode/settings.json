@@ -42,10 +42,10 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "[yaml]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -53,5 +53,8 @@
   "prettier.enable": false,
   "[jsonc]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }

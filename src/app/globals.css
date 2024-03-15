@@ -2,6 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  padding: 0em 0.75em;
-}
+@layer mantine, mantine-datatable;

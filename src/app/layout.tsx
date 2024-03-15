@@ -1,6 +1,8 @@
-import './globals.css';
-import '@mantine/core/styles.css';
+import '@mantine/core/styles.layer.css';
 import '@mantine/notifications/styles.css';
+import 'mantine-datatable/styles.layer.css';
+import '@mantine/dates/styles.layer.css';
+import './globals.css';
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
@@ -10,6 +12,7 @@ import React from 'react';
 
 import LogtoErrorNotificator from '@/components/LogtoErrorNotificator';
 import NavBar from '@/components/navbar/NavBar';
+import NavigationProgress from '@/components/NavigationProgress';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
 import theme from '@/utils/theme';
 
@@ -26,10 +29,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript defaultColorScheme='dark' forceColorScheme='dark' />
       </head>
-      <body className={raleway.className}>
+      <body className={`${raleway.className} min-h-[100dvh] px-4`}>
         <ReactQueryProvider>
           <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark' withGlobalClasses>
             <Notifications position='top-right' />
+            <NavigationProgress />
             <LogtoErrorNotificator />
             <NavBar />
             {children}

@@ -5,12 +5,12 @@ import db from '@/db';
 import { users } from '@/db/schema';
 import API from '@/types/api';
 import User from '@/types/user';
-import ApiErrorHandler from '@/utils/api/api-error-handler';
-import FetchUserInfo from '@/utils/api/authorization-check';
+import apiErrorHandler from '@/utils/api/api-error-handler';
+import fetchUserInfo from '@/utils/api/authorization-check';
 
 export async function GET(req: NextRequest): API<User> {
   try {
-    const userInfo = await FetchUserInfo();
+    const userInfo = await fetchUserInfo();
 
     const userExists = !!(await db.query.users.findFirst({ where: eq(users.id, userInfo.sub) }));
 
@@ -46,6 +46,6 @@ export async function GET(req: NextRequest): API<User> {
       avatar: userInfo.picture ?? null,
     });
   } catch (error) {
-    return ApiErrorHandler(req, error);
+    return apiErrorHandler(req, error);
   }
 }
