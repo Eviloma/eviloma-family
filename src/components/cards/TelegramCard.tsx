@@ -6,7 +6,7 @@ import { RefreshCcw } from 'lucide-react';
 import React from 'react';
 
 import TelegramIcon from '@/icons/Telegram';
-import User from '@/types/user';
+import { ExtendedUser } from '@/types/user';
 import QueryRequest from '@/utils/query-request';
 
 import CardTitle from './items/CardTitle';
@@ -15,7 +15,7 @@ import TelegramUnLinkButton from './items/TelegramUnlinkButton';
 
 export default function TelegramCard() {
   const queryClient = useQueryClient();
-  const { data, isLoading, isRefetching } = useQuery<User>({
+  const { data, isLoading, isRefetching } = useQuery<ExtendedUser>({
     queryKey: ['user'],
     queryFn: () =>
       QueryRequest({

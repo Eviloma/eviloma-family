@@ -34,7 +34,7 @@ export default function SubscriptionCard({ subscription }: IProps) {
 
       <Flex align='center' gap='sm' mt='md'>
         <CalendarClock />
-        <Text size='sm'>{`Наступна оплата: ${dayjs().to(subscription.date)}`}</Text>
+        <Text>{`Оплата ${dayjs().to(subscription.date)}`}</Text>
       </Flex>
 
       <Flex align='center' gap='sm' mt='md'>

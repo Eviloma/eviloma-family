@@ -6,17 +6,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { ApiErrorClass } from '@/app/classes/ApiError';
 import db from '@/db';
 import { subscriptions } from '@/db/schema';
+import API from '@/types/api';
+import Subscription from '@/types/subscription';
 import apiErrorHandler from '@/utils/api/api-error-handler';
 import fetchUserInfo from '@/utils/api/authorization-check';
 import { SCOPES, SUBSCRIPTION_CATEGORIES } from '@/utils/consts';
 
-export async function GET() {
+export async function GET(req: NextRequest): API<Subscription[]> {
   try {
     await fetchUserInfo(SCOPES.admin);
     const subscriptionsData = await db.select().from(subscriptions).orderBy(subscriptions.title);
     return NextResponse.json(subscriptionsData, { status: 200 });
   } catch (err) {
-    return NextResponse.json({ error: 'Server Error' }, { status: 500 });
+    return apiErrorHandler(req, err);
   }
 }
 

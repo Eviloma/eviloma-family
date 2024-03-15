@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import db from '@/db';
 import { users } from '@/db/schema';
 import API from '@/types/api';
-import User from '@/types/user';
+import { ExtendedUser } from '@/types/user';
 import apiErrorHandler from '@/utils/api/api-error-handler';
 import fetchUserInfo from '@/utils/api/authorization-check';
 
-export async function GET(req: NextRequest): API<User> {
+export async function GET(req: NextRequest): API<ExtendedUser> {
   try {
     const userInfo = await fetchUserInfo();
 
@@ -17,6 +17,9 @@ export async function GET(req: NextRequest): API<User> {
     if (!userExists) {
       await db.insert(users).values({
         id: userInfo.sub,
+        username: userInfo.username,
+        email: userInfo.email!,
+        avatar: userInfo.picture,
       });
     }
 

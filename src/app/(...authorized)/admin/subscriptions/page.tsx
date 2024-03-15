@@ -2,7 +2,7 @@ import { Title } from '@mantine/core';
 import React from 'react';
 
 import CreateSubscriptionButton from '@/components/admin/subscriptions/CreateSubscriptionButton';
-import SubscriptionsList from '@/components/admin/subscriptions/SubscriptionsTable';
+import SubscriptionsList from '@/components/admin/subscriptions/SubscriptionsList';
 
 export default function AdminSubscriptionsPage() {
   return (

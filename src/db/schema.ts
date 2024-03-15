@@ -8,6 +8,9 @@ export const transactionCategories = pgEnum('transaction_categories', TRANSACTIO
 
 export const users = pgTable('users', {
   id: text('id').primaryKey().unique().notNull(),
+  username: text('username'),
+  email: text('email').notNull().unique(),
+  avatar: text('avatar'),
   balance: integer('balance').default(0).notNull(),
   paymentLink: text('payment_link'),
   telegramID: text('telegram_id').unique(),
