@@ -13,7 +13,6 @@ const nextConfig = {
     buildActivityPosition: 'top-right',
   },
   experimental: {
-    typedRoutes: true,
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
 };

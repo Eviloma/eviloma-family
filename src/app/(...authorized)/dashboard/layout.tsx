@@ -3,7 +3,7 @@ import React from 'react';
 
 import { getLogtoContext } from '@/utils/logto';
 
-export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = await getLogtoContext();
 
   if (!isAuthenticated) {

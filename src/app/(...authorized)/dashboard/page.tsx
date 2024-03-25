@@ -12,7 +12,7 @@ import getQueryClient from '@/utils/get-query-client';
 import { getLogtoContext } from '@/utils/logto';
 import QueryRequest from '@/utils/query-request';
 
-export default async function DashboardPage() {
+export default async function Page() {
   const { userInfo } = await getLogtoContext({ fetchUserInfo: true });
 
   const queryClient = getQueryClient();
