@@ -1,4 +1,9 @@
 import { QueryClient } from '@tanstack/react-query';
+import { includes } from 'lodash';
+
+import ErrorWithCode from '@/app/classes/ErrorWithCode';
+
+import { DONT_RETRY_STATUS_CODES, MAX_RETRY_ATTEMPTS } from './consts';
 
 let browserQueryClient: QueryClient | undefined;
 
@@ -6,9 +11,14 @@ function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        // With SSR, we usually want to set some default staleTime
-        // above 0 to avoid refetching immediately on the client
         staleTime: 15 * 1000,
+        retry(failureCount, err) {
+          if (failureCount > MAX_RETRY_ATTEMPTS) {
+            return false;
+          }
+
+          return !(err instanceof ErrorWithCode && includes(DONT_RETRY_STATUS_CODES, err.code));
+        },
       },
     },
   });

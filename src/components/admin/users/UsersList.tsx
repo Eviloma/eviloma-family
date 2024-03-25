@@ -57,8 +57,8 @@ export default function UsersList() {
                 href={`/admin/users/${value.id}`}
                 size='lg'
                 p='2px'
-                variant='transparent'
-                c='yellow'
+                variant='subtle'
+                color='yellow'
               >
                 <Pencil />
               </ActionIcon>

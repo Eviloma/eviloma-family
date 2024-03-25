@@ -6,7 +6,7 @@
     "build": "next build",
     "db:generate": "drizzle-kit generate:pg",
     "db:migrate": "tsx src/db/migration.ts",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "lint": "next lint --format=mo --fix",
     "prepare": "husky",
     "start": "next start"

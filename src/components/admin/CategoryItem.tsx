@@ -1,10 +1,11 @@
-import { Group, Text } from '@mantine/core';
 import { Banknote, CircleHelp } from 'lucide-react';
 import React from 'react';
 
 import SpotifyIcon from '@/icons/Spotify';
 import YoutubeIcon from '@/icons/Youtube';
 import { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from '@/utils/consts';
+
+import SelectItemWithIcon from './SelectItemWithIcon';
 
 interface IProps {
   category: (typeof SUBSCRIPTION_CATEGORIES)[number] | (typeof TRANSACTION_CATEGORIES)[number];
@@ -38,10 +39,5 @@ export function getCategoryData(category: IProps['category']) {
 export default function CategorySelectItem({ category }: IProps) {
   const data = getCategoryData(category);
 
-  return (
-    <Group gap='md'>
-      {data.icon}
-      <Text>{data.label}</Text>
-    </Group>
-  );
+  return <SelectItemWithIcon icon={data.icon} label={data.label} />;
 }

@@ -1,4 +1,7 @@
+import { StatusCodes } from 'http-status-codes';
 import { constant } from 'lodash';
+
+import ErrorWithCode from '@/app/classes/ErrorWithCode';
 
 interface Options {
   link: string;
@@ -18,11 +21,11 @@ export default async function QueryRequest<T>(options: Options): Promise<T> {
     const responseData = (await res.json().catch(constant(null))) as T | ResponseError | null;
     if (res.ok) {
       if (!responseData) {
-        throw new Error('Не вдалось отримати відповідь сервера');
+        throw new ErrorWithCode(StatusCodes.NO_CONTENT, 'Не вдалось отримати відповідь сервера');
       }
       return responseData as T;
     }
 
-    throw new Error(`${res.status}: ${(responseData as ResponseError)?.error_message ?? res.statusText}`);
+    throw new ErrorWithCode(res.status, `${(responseData as ResponseError)?.error_message ?? res.statusText}`);
   });
 }
