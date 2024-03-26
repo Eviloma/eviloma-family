@@ -37,6 +37,14 @@ export default function UserProfileTab({ user }: IProps) {
             bottomDescription='Для зміни Username перейдіть на Eviloma ID'
           />
         </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 6, lg: 4, xl: 3 }}>
+          <UserReadOnlyCard
+            title='Баланс'
+            description='Баланс користувача'
+            value={`${user.balance / 100} ₴`}
+            bottomDescription='Баланс дозволено змінювати лише за допомогою транзакцій'
+          />
+        </Grid.Col>
       </Grid>
     </TabsPanel>
   );

@@ -63,7 +63,7 @@ export default function BalanceCard() {
             <Text size='36px' ta='center' fw={600} c={data.balance < 0 ? 'red' : ''}>
               <NumberFormatter
                 suffix=' ₴'
-                value={data.balance}
+                value={data.balance / 100}
                 thousandSeparator=' '
                 decimalScale={2}
                 fixedDecimalScale
