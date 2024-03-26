@@ -45,7 +45,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await fetchUserInfo(SCOPES.admin);
-    const { title, category, price, date } = await req.json();
+    const { title, category, suma, date } = await req.json();
 
     if (!title || title.length < 3) {
       throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Заголовок транзакції не може бути менше 3 символів');
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       );
     }
 
-    if (!price || Number.isNaN(price)) {
+    if (!suma || Number.isNaN(suma)) {
       throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Сума транзакції не заповнена або не є числом');
     }
 
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         user: params.id,
         title,
         category,
-        suma: price * 100,
+        suma: suma * 100,
         date: dayjs(date).toDate(),
       })
       .returning();
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     }
 
     await db.update(users).set({
-      balance: sql`balance + ${price}`,
+      balance: sql`balance + ${suma * 100}`,
     });
 
     return NextResponse.json({ transaction: transaction[0] }, { status: 200 });

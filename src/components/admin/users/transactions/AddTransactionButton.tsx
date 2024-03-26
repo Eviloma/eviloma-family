@@ -37,7 +37,7 @@ const schema = z.object({
   date: z
     .date({ required_error: 'Оберіть дату платежу', invalid_type_error: 'Невірний формат дати платежу' })
     .min(dayjs().subtract(1, 'day').toDate(), 'Дата повинна бути більшою за поточну'),
-  price: z.number(),
+  suma: z.number(),
 });
 
 interface IProps {
@@ -56,7 +56,7 @@ export default function AddTransactionButton({ id }: IProps) {
     validate: zodResolver(schema),
     initialValues: {
       title: '',
-      price: 0,
+      suma: 0,
       category: TRANSACTION_CATEGORIES[0] as z.infer<typeof schema>['category'],
       date: dayjs().toDate(),
     },
@@ -132,7 +132,7 @@ export default function AddTransactionButton({ id }: IProps) {
             </Combobox>
             <Group gap='sm' wrap='nowrap' align='start' grow>
               <NumberInput
-                {...form.getInputProps('price')}
+                {...form.getInputProps('suma')}
                 label='Сума'
                 placeholder='50.00'
                 withAsterisk

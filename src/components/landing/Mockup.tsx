@@ -44,18 +44,6 @@ export default function Mockup() {
                 quality={100}
                 priority
               />
-              <Image
-                component={NextImage}
-                hiddenFrom='md'
-                alt='Mockup Mobile'
-                radius='md'
-                src='/mockups/mobile3.png'
-                mah='540px'
-                height={1920}
-                width={1080}
-                quality={100}
-                priority
-              />
             </Group>
           </ScrollArea>
         </CardSection>
