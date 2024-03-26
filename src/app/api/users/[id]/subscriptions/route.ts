@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { map } from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { ApiErrorClass } from '@/app/classes/ApiError';
+import { ApiErrorClass } from '@/classes/ApiError';
 import db from '@/db';
 import { users } from '@/db/schema';
 import API from '@/types/api';

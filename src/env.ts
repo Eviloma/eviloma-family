@@ -18,6 +18,8 @@ export const env = createEnv({
       .url('BASE_URL must be a valid URL')
       .optional()
       .default('http://localhost:3000'),
+    PAYMENT_LINK_KEY: z.string({ required_error: 'PAYMENT_LINK_KEY is required' }),
+    PAYMENT_API_KEY: z.string({ required_error: 'PAYMENT_API_KEY is required' }),
   },
   client: {
     NEXT_PUBLIC_TELEGRAM_BOT_LINK: z.string().url('NEXT_PUBLIC_TELEGRAM_BOT_LINK must be a valid URL'),

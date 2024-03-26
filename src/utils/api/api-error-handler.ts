@@ -1,7 +1,7 @@
 import { isError } from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { ApiErrorClass } from '@/app/classes/ApiError';
+import { ApiErrorClass } from '@/classes/ApiError';
 import type { ApiError } from '@/types/api';
 
 export default function apiErrorHandler(_: NextRequest, error: unknown): NextResponse<ApiError> {

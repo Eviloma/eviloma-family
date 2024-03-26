@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { includes, join } from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { ApiErrorClass } from '@/app/classes/ApiError';
+import { ApiErrorClass } from '@/classes/ApiError';
 import db from '@/db';
 import { subscriptions } from '@/db/schema';
 import apiErrorHandler from '@/utils/api/api-error-handler';

@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { constant } from 'lodash';
 
-import ErrorWithCode from '@/app/classes/ErrorWithCode';
+import ErrorWithCode from '@/classes/ErrorWithCode';
 
 interface Options {
   link: string;

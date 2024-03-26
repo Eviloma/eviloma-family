@@ -2,7 +2,7 @@ import { and, eq } from 'drizzle-orm';
 import { StatusCodes } from 'http-status-codes';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { ApiErrorClass } from '@/app/classes/ApiError';
+import { ApiErrorClass } from '@/classes/ApiError';
 import db from '@/db';
 import { userOnSubscriptions } from '@/db/schema';
 import apiErrorHandler from '@/utils/api/api-error-handler';

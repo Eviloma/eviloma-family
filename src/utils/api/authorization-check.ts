@@ -1,6 +1,6 @@
 import { includes } from 'lodash';
 
-import { ErrorFetchingUserInfo, ForbiddenError, UnauthorizedError } from '@/app/classes/ApiError';
+import { ErrorFetchingUserInfo, ForbiddenError, UnauthorizedError } from '@/classes/ApiError';
 
 import { getLogtoContext } from '../logto';
 
