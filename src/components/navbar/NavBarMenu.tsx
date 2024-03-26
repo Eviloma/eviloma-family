@@ -31,7 +31,7 @@ export default function NavBarMenu({ username, email, avatar, scopes }: IProps) 
         <MenuItem component={Link} href='/dashboard' leftSection={<LayoutDashboard {...iconProps} />}>
           Інформаційна дошка
         </MenuItem>
-        <MenuItem component={Link} href='/transactions' leftSection={<ReceiptText {...iconProps} />}>
+        <MenuItem component={Link} href='/dashboard/transactions' leftSection={<ReceiptText {...iconProps} />}>
           Транзакції
         </MenuItem>
         <MenuDivider />

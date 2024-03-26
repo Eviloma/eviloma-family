@@ -1,32 +1,23 @@
 'use client';
 
-import 'dayjs/locale/uk';
-
-import { Group, Stack } from '@mantine/core';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { forEach } from 'lodash';
 import React, { useMemo } from 'react';
 
-import TransactionsTable from '@/components/transactions/TransactionsTable';
 import Transaction from '@/types/transaction';
-import User from '@/types/user';
 import QueryRequest from '@/utils/query-request';
 
-import AddTransactionButton from './AddTransactionButton';
+import TransactionsTable from './transactions/TransactionsTable';
 
-interface IProps {
-  user: User;
-}
-
-export default function UserTransactionTab({ user }: IProps) {
+export default function UserTransactions() {
   const { data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery<{
     data: Transaction[];
     meta: { page: number; total: number };
   }>({
-    queryKey: [`user-${user.id}-transactions`],
+    queryKey: [`user-transactions`],
     queryFn: ({ pageParam }) =>
       QueryRequest({
-        link: `/api/users/${user.id}/transactions?page=${pageParam}`,
+        link: `/api/user/transactions?page=${pageParam}`,
         method: 'GET',
       }),
     initialPageParam: 1,
@@ -46,13 +37,7 @@ export default function UserTransactionTab({ user }: IProps) {
 
     return result;
   }, [data]);
-
   return (
-    <Stack gap='sm' w='100%'>
-      <Group justify='end'>
-        <AddTransactionButton id={user.id} />
-      </Group>
-      <TransactionsTable data={allData} isFetching={isFetching || isFetchingNextPage} fetchNextPage={fetchNextPage} />
-    </Stack>
+    <TransactionsTable data={allData} isFetching={isFetching || isFetchingNextPage} fetchNextPage={fetchNextPage} />
   );
 }

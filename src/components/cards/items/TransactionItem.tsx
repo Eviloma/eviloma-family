@@ -1,24 +1,26 @@
-import { Box, Flex, Group, NumberFormatter, Paper, Stack, Text, Title } from '@mantine/core';
+import { Box, Flex, Group, NumberFormatter, Stack, Text, Title } from '@mantine/core';
+import dayjs from 'dayjs';
 import React from 'react';
 
-import YoutubeIcon from '@/icons/Youtube';
+import CategoryIcon from '@/components/CategoryIcon';
+import Transaction from '@/types/transaction';
 
-export default function TransactionItem() {
-  const summa = +100;
+interface IProps {
+  transaction: Transaction;
+}
 
+export default function TransactionItem({ transaction }: IProps) {
   return (
     <Flex gap='xs' direction={{ base: 'column', xs: 'row' }} justify={{ xs: 'space-between' }}>
       <Group gap='sm' align='center' wrap='nowrap' className='overflow-x-hidden'>
-        <Paper p='xs' radius='xl'>
-          <YoutubeIcon fill='#ff0000' height='16px' width='16px' />
-        </Paper>
+        <CategoryIcon category={transaction.category} />
         <Stack gap='2px' justify='space-around' w='100%'>
           <Title order={3} size='h4'>
-            Spotify Premium 1st 2024
+            {transaction.title}
           </Title>
           <Box w={{ base: '92%', xs: '100%' }}>
             <Text size='xs' c='dimmed' truncate='end'>
-              030f1d67-6d34-47dc-82bc-66207aa0bd9c
+              {transaction.id}
             </Text>
           </Box>
         </Stack>
@@ -29,16 +31,19 @@ export default function TransactionItem() {
         justify={{ base: 'space-between', xs: 'space-around' }}
         direction={{ base: 'row', xs: 'column' }}
       >
-        <Text>01.01.2024 00:00</Text>
-        <Text c={summa < 0 ? 'red' : 'green'} fw={500} size='lg'>
+        <Text c={transaction.suma < 0 ? 'red' : 'green'} fw={500} size='lg'>
           <NumberFormatter
-            value={summa}
-            prefix={summa > 0 ? '+' : ''}
+            value={transaction.suma / 100}
+            prefix={transaction.suma > 0 ? '+' : ''}
             suffix=' ₴'
             thousandSeparator=' '
             decimalScale={2}
             fixedDecimalScale
           />
+        </Text>
+
+        <Text c='dimmed' size='sm'>
+          {dayjs(transaction.date).format('DD.MM.YYYY HH:mm:ss')}
         </Text>
       </Flex>
     </Flex>

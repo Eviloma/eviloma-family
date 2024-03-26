@@ -1,8 +1,8 @@
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 
 import db from '@/db';
-import { users } from '@/db/schema';
+import { transactions, users } from '@/db/schema';
 import API from '@/types/api';
 import { ExtendedUser } from '@/types/user';
 import apiErrorHandler from '@/utils/api/api-error-handler';
@@ -34,6 +34,7 @@ export async function GET(req: NextRequest): API<ExtendedUser> {
         },
         transactions: {
           limit: 5,
+          orderBy: desc(transactions.date),
         },
       },
     });

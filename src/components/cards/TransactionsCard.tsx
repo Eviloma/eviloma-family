@@ -1,8 +1,10 @@
 'use client';
 
-import { ActionIcon, Card, Divider, GridCol, Skeleton, Stack, Tooltip } from '@mantine/core';
+import { ActionIcon, Card, GridCol, Skeleton, Stack, Tooltip } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
+import { map } from 'lodash';
 import { FileStack, ReceiptText } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 import { ExtendedUser } from '@/types/user';
@@ -45,7 +47,7 @@ export default function TransactionsCard() {
         <Card.Section withBorder inheritPadding py='xs'>
           <CardTitle icon={<ReceiptText />} title='Транзакції'>
             <Tooltip label='Всі транзакції' withArrow events={{ hover: true, focus: true, touch: false }}>
-              <ActionIcon variant='light' size='lg'>
+              <ActionIcon component={Link} href='/dashboard/transactions' variant='light' size='lg'>
                 <FileStack />
               </ActionIcon>
             </Tooltip>
@@ -53,15 +55,9 @@ export default function TransactionsCard() {
         </Card.Section>
 
         <Stack gap='xs' mt='md' justify='space-between' h='100%'>
-          <TransactionItem />
-          <Divider />
-          <TransactionItem />
-          <Divider />
-          <TransactionItem />
-          <Divider />
-          <TransactionItem />
-          <Divider />
-          <TransactionItem />
+          {map(data.transactions, (transaction) => (
+            <TransactionItem key={transaction.id} transaction={transaction} />
+          ))}
         </Stack>
       </Card>
     </GridCol>

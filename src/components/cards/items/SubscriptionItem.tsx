@@ -2,7 +2,7 @@ import { Box, Flex, Group, NumberFormatter, Stack, Text, Title } from '@mantine/
 import dayjs from 'dayjs';
 import React from 'react';
 
-import { getCategoryData } from '@/components/admin/CategoryItem';
+import CategoryIcon from '@/components/CategoryIcon';
 import Subscription from '@/types/subscription';
 
 interface IProps {
@@ -13,9 +13,7 @@ export default function SubscriptionItem({ subscription }: IProps) {
   return (
     <Flex gap='xs' direction={{ base: 'column', xs: 'row' }} justify={{ xs: 'space-between' }} align={{ xs: 'center' }}>
       <Group gap='sm' align='center' wrap='nowrap' className='overflow-x-hidden'>
-        <Box bg='dark.7' p='xs' className='flex items-center justify-center rounded-full'>
-          {getCategoryData(subscription.category).icon}
-        </Box>
+        <CategoryIcon category={subscription.category} />
         <Stack gap='2px' justify='space-around' w='100%'>
           <Title order={3} size='h4'>
             {subscription.title}
