@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript defaultColorScheme='dark' forceColorScheme='dark' />
       </head>
-      <body className={`${raleway.className} min-h-[100dvh] px-4`}>
+      <body className={`${raleway.className} min-h-dvh px-4`}>
         <ReactQueryProvider>
           <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark' withGlobalClasses>
             <Notifications position='top-right' />

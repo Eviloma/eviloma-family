@@ -19,7 +19,7 @@ interface IProps {
   userSubscriptionIds: string[];
 }
 
-export default function AddSubscription({ id, userSubscriptionIds }: IProps) {
+export default function AddSubscriptionButton({ id, userSubscriptionIds }: IProps) {
   const { data, isLoading: isLoadingSubscriptions } = useQuery<Subscription[]>({
     queryKey: ['subscriptions'],
     queryFn: () =>

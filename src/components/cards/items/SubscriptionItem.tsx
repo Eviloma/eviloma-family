@@ -1,28 +1,40 @@
-import { Box, Flex, Group, NumberFormatter, Paper, Stack, Text, Title } from '@mantine/core';
+import { Box, Flex, Group, NumberFormatter, Stack, Text, Title } from '@mantine/core';
+import dayjs from 'dayjs';
 import React from 'react';
 
-import YoutubeIcon from '@/icons/Youtube';
+import { getCategoryData } from '@/components/admin/CategoryItem';
+import Subscription from '@/types/subscription';
 
-export default function SubscriptionItem() {
+interface IProps {
+  subscription: Subscription;
+}
+
+export default function SubscriptionItem({ subscription }: IProps) {
   return (
     <Flex gap='xs' direction={{ base: 'column', xs: 'row' }} justify={{ xs: 'space-between' }} align={{ xs: 'center' }}>
       <Group gap='sm' align='center' wrap='nowrap' className='overflow-x-hidden'>
-        <Paper p='xs' radius='xl'>
-          <YoutubeIcon fill='#ff0000' height='16px' width='16px' />
-        </Paper>
+        <Box bg='dark.7' p='xs' className='flex items-center justify-center rounded-full'>
+          {getCategoryData(subscription.category).icon}
+        </Box>
         <Stack gap='2px' justify='space-around' w='100%'>
           <Title order={3} size='h4'>
-            Spotify Premium 1st 2024
+            {subscription.title}
           </Title>
-          <Box w='92%'>
+          <Box w={{ base: '92%', xs: '100%' }}>
             <Text size='xs' c='dimmed' truncate='end'>
-              Наступна оплата: 01.01.2024
+              Наступна оплата: {dayjs().to(subscription.date)}
             </Text>
           </Box>
         </Stack>
       </Group>
       <Text fw={500} size='lg' ta='end'>
-        <NumberFormatter value={30} suffix=' ₴/міс' thousandSeparator=' ' decimalScale={2} fixedDecimalScale />
+        <NumberFormatter
+          value={subscription.price / 100}
+          suffix=' ₴/міс'
+          thousandSeparator=' '
+          decimalScale={2}
+          fixedDecimalScale
+        />
       </Text>
     </Flex>
   );

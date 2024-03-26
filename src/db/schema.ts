@@ -21,7 +21,7 @@ export const subscriptions = pgTable('subscriptions', {
   title: text('title').notNull().unique(),
   category: subscriptionCategories('category').notNull().default('Other'),
   price: integer('price').notNull(),
-  date: timestamp('date').notNull(),
+  date: timestamp('date', { mode: 'date' }).notNull(),
 });
 
 export const transactions = pgTable('transactions', {
@@ -32,7 +32,7 @@ export const transactions = pgTable('transactions', {
   title: text('title').notNull(),
   category: transactionCategories('category').notNull().default('Other'),
   suma: integer('suma').notNull(),
-  date: timestamp('date').defaultNow().notNull(),
+  date: timestamp('date', { mode: 'date' }).defaultNow().notNull(),
 });
 
 export const telegramLinkTokens = pgTable('telegram_link_tokens', {
@@ -42,7 +42,7 @@ export const telegramLinkTokens = pgTable('telegram_link_tokens', {
     .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
     .unique(),
   token: text('token').unique().notNull(),
-  validUntil: timestamp('valid_until').default(sql`now() + INTERVAL '15 minutes'`),
+  validUntil: timestamp('valid_until', { mode: 'date' }).default(sql`now() + INTERVAL '15 minutes'`),
 });
 
 export const userOnSubscriptions = pgTable(

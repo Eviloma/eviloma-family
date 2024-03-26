@@ -1,7 +1,12 @@
 'use client';
 
-import { Card, Divider, GridCol, Skeleton, Stack } from '@mantine/core';
+import 'dayjs/locale/uk';
+
+import { Card, GridCol, Skeleton, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { map } from 'lodash';
 import { Boxes } from 'lucide-react';
 import React from 'react';
 
@@ -10,6 +15,9 @@ import QueryRequest from '@/utils/query-request';
 
 import CardTitle from './items/CardTitle';
 import SubscriptionItem from './items/SubscriptionItem';
+
+dayjs.extend(relativeTime);
+dayjs.locale('uk');
 
 export default function SubscriptionsCard() {
   const { data, isLoading } = useQuery<ExtendedUser>({
@@ -48,11 +56,9 @@ export default function SubscriptionsCard() {
         </Card.Section>
 
         <Stack gap='xs' mt='md' h='100%'>
-          <SubscriptionItem />
-          <Divider />
-          <SubscriptionItem />
-          <Divider />
-          <SubscriptionItem />
+          {map(data.subscriptions, ({ subscription }) => (
+            <SubscriptionItem key={subscription.id} subscription={subscription} />
+          ))}
         </Stack>
       </Card>
     </GridCol>

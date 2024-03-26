@@ -1,7 +1,11 @@
 'use client';
 
+import 'dayjs/locale/uk';
+
 import { Center, Grid, Group, Skeleton, Stack } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { map } from 'lodash';
 import React from 'react';
 
@@ -10,12 +14,15 @@ import Subscription from '@/types/subscription';
 import User from '@/types/user';
 import QueryRequest from '@/utils/query-request';
 
-import AddSubscription from './AddSubscription';
+import AddSubscriptionButton from './AddSubscriptionButton';
 import SubscriptionCard from './SubscriptionCard';
 
 interface IProps {
   user: User;
 }
+
+dayjs.extend(relativeTime);
+dayjs.locale('uk');
 
 export default function UserSubscriptionsTab({ user }: IProps) {
   const { data, error, isLoading } = useQuery<Subscription[]>({
@@ -42,7 +49,7 @@ export default function UserSubscriptionsTab({ user }: IProps) {
   return (
     <Stack gap='sm' w='100%'>
       <Group justify='end'>
-        <AddSubscription id={user.id} userSubscriptionIds={map(data, 'id')} />
+        <AddSubscriptionButton id={user.id} userSubscriptionIds={map(data, 'id')} />
       </Group>
       <Grid>
         {map(data, (subscription) => (

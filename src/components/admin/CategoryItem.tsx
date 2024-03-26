@@ -26,7 +26,7 @@ export function getCategoryData(category: IProps['category']) {
     case 'Deposit':
       return {
         label: 'Deposit',
-        icon: <Banknote />,
+        icon: <Banknote width={24} height={24} className='text-[var(--mantine-color-violet-5)]' />,
       };
     default:
       return {
