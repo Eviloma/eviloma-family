@@ -8,4 +8,10 @@ const SCOPES = {
 const MAX_RETRY_ATTEMPTS = 3;
 const DONT_RETRY_STATUS_CODES = [StatusCodes.TOO_MANY_REQUESTS, StatusCodes.NOT_FOUND];
 
-export { DONT_RETRY_STATUS_CODES, MAX_RETRY_ATTEMPTS, SCOPES, SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES };
+const META = {
+  title: 'Eviloma Family',
+  title_template: `%s | Eviloma Family`,
+  description: 'Система управління сімейними підписками Eviloma',
+};
+
+export { DONT_RETRY_STATUS_CODES, MAX_RETRY_ATTEMPTS, META, SCOPES, SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES };

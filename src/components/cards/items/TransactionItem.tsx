@@ -29,7 +29,7 @@ export default function TransactionItem({ transaction }: IProps) {
         gap='0px'
         align={{ base: 'center', xs: 'end' }}
         justify={{ base: 'space-between', xs: 'space-around' }}
-        direction={{ base: 'row', xs: 'column' }}
+        direction={{ base: 'row-reverse', xs: 'column' }}
       >
         <Text c={transaction.suma < 0 ? 'red' : 'green'} fw={500} size='lg'>
           <NumberFormatter

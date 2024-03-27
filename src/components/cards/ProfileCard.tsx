@@ -1,7 +1,7 @@
 'use client';
 
 import { UserInfoResponse } from '@logto/node';
-import { Avatar, Button, Card, CopyButton, GridCol, Group, Stack, Text } from '@mantine/core';
+import { Avatar, Button, Card, CopyButton, Flex, GridCol, Stack, Text } from '@mantine/core';
 import { Clipboard, ClipboardCheck, UserRound } from 'lucide-react';
 import React from 'react';
 
@@ -26,18 +26,32 @@ export default function ProfileCard({ userInfo }: IProps) {
         </Card.Section>
 
         <Stack gap='md' mt='md' justify='space-between' h='100%'>
-          <Stack gap='sm' align='center' my='auto'>
-            <Group gap='sm' align='center'>
-              <Avatar src={userInfo.picture} alt='Avatar' size='xl' color='violet' />
-              <Stack gap='1px' py='xs'>
-                <Text fw={600} size='xl'>
-                  {userInfo.username}
-                </Text>
-                <Text c='dimmed'>{userInfo.sub}</Text>
-                <Text c='dimmed'>{userInfo.email}</Text>
-              </Stack>
-            </Group>
-          </Stack>
+          <Flex
+            direction={{
+              base: 'column',
+              xs: 'row',
+            }}
+            gap='sm'
+            align='center'
+            justify='center'
+            h='100%'
+          >
+            <Avatar src={userInfo.picture} alt='Avatar' size='xl' color='violet' />
+            <Stack
+              gap='1px'
+              py='xs'
+              ta={{
+                base: 'center',
+                xs: 'start',
+              }}
+            >
+              <Text fw={600} size='xl'>
+                {userInfo.username}
+              </Text>
+              <Text c='dimmed'>{userInfo.sub}</Text>
+              <Text c='dimmed'>{userInfo.email}</Text>
+            </Stack>
+          </Flex>
 
           <Stack gap='sm' mt='md'>
             <CopyButton value={userInfo.sub}>

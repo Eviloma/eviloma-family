@@ -1,5 +1,6 @@
 import { Grid } from '@mantine/core';
 import { dehydrate } from '@tanstack/react-query';
+import { Metadata } from 'next/types';
 import React from 'react';
 
 import BalanceCard from '@/components/cards/BalanceCard';
@@ -11,6 +12,14 @@ import Hydrate from '@/components/Hydrate';
 import getQueryClient from '@/utils/get-query-client';
 import { getLogtoContext } from '@/utils/logto';
 import QueryRequest from '@/utils/query-request';
+
+const PAGE_TITLE = 'Інформаційна дошка';
+export const metadata: Metadata = {
+  title: PAGE_TITLE,
+  openGraph: {
+    title: PAGE_TITLE,
+  },
+};
 
 export default async function Page() {
   const { userInfo } = await getLogtoContext({ fetchUserInfo: true });
