@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { customAlphabet } from 'nanoid';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { ApiErrorClass } from '@/classes/ApiError';
+import { ApiErrorClass, ForbiddenError } from '@/classes/ApiError';
 import db from '@/db';
 import { telegramLinkTokens, users } from '@/db/schema';
 import API from '@/types/api';
@@ -47,11 +47,71 @@ export async function POST(req: NextRequest): API<TelegramPOST> {
   }
 }
 
+export async function PUT(req: NextRequest) {
+  try {
+    const authorization = req.headers.get('Authorization');
+
+    if (!authorization || authorization !== `Bearer ${process.env.TELEGRAM_API_KEY}`) {
+      throw ForbiddenError;
+    }
+
+    const { token, telegramID, username, avatar } = await req.json();
+
+    if (!token || !telegramID) {
+      throw new ApiErrorClass(
+        StatusCodes.BAD_REQUEST,
+        'Токен та телеграмм ID не можуть бути порожніми',
+        undefined,
+        'MISSING_PARAMS'
+      );
+    }
+
+    const tokenObject = await db.query.telegramLinkTokens.findFirst({
+      where: eq(telegramLinkTokens.token, token),
+    });
+
+    if (!tokenObject) {
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Невірний токен', 'INVALID_TOKEN');
+    }
+
+    if (dayjs(tokenObject.validUntil).isBefore(dayjs())) {
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Токен вже вичерпаний', 'EXPIRED_TOKEN');
+    }
+
+    const telegramUser = await db.query.users.findFirst({
+      where: eq(users.telegramID, telegramID),
+    });
+
+    if (telegramUser) {
+      throw new ApiErrorClass(StatusCodes.CONFLICT, 'Користувач вже зареєстрований', 'ALREADY_REGISTERED');
+    }
+
+    const user = await db
+      .update(users)
+      .set({ telegramID, telegramUsername: username, telegramAvatar: avatar })
+      .where(eq(users.id, tokenObject.user))
+      .returning();
+
+    if (!user || user.length === 0) {
+      throw new ApiErrorClass(StatusCodes.NOT_FOUND, 'Користувач не знайдено', 'USER_NOT_FOUND');
+    }
+
+    await db.delete(telegramLinkTokens).where(eq(telegramLinkTokens.id, tokenObject.id));
+
+    return NextResponse.json({}, { status: 200 });
+  } catch (error) {
+    return apiErrorHandler(req, error);
+  }
+}
+
 export async function DELETE(req: NextRequest): API<unknown> {
   try {
     const userInfo = await fetchUserInfo();
 
-    await db.update(users).set({ telegramID: null }).where(eq(users.id, userInfo.sub));
+    await db
+      .update(users)
+      .set({ telegramID: null, telegramUsername: null, telegramAvatar: null })
+      .where(eq(users.id, userInfo.sub));
     return NextResponse.json({
       status: 'success',
     });

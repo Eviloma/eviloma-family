@@ -14,6 +14,8 @@ export const users = pgTable('users', {
   balance: integer('balance').default(0).notNull(),
   paymentLink: text('payment_link'),
   telegramID: text('telegram_id').unique(),
+  telegramUsername: text('telegram_username'),
+  telegramAvatar: text('telegram_avatar'),
 });
 
 export const subscriptions = pgTable('subscriptions', {
@@ -42,7 +44,9 @@ export const telegramLinkTokens = pgTable('telegram_link_tokens', {
     .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
     .unique(),
   token: text('token').unique().notNull(),
-  validUntil: timestamp('valid_until', { mode: 'date' }).default(sql`now() + INTERVAL '15 minutes'`),
+  validUntil: timestamp('valid_until', { mode: 'date' })
+    .default(sql`now() + INTERVAL '15 minutes'`)
+    .notNull(),
 });
 
 export const userOnSubscriptions = pgTable(

@@ -5,10 +5,13 @@ export class ApiErrorClass extends Error {
 
   detailedMessage?: string;
 
-  constructor(code: StatusCodes, message: string, detailedMessage?: string) {
+  detailedCode?: string;
+
+  constructor(code: StatusCodes, message: string, detailedMessage?: string, detailedCode?: string) {
     super(message);
     this.code = code;
     this.detailedMessage = detailedMessage;
+    this.detailedCode = detailedCode;
   }
 }
 

@@ -1,3 +1,4 @@
+import { Title } from '@mantine/core';
 import { Metadata } from 'next/types';
 import React from 'react';
 
@@ -13,9 +14,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className='space-y-8'>
-      <h2>Транзакції</h2>
+    <>
+      <Title ta='center' mb='md'>
+        Транзакції
+      </Title>
       <UserTransactions />
-    </div>
+    </>
   );
 }

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <Title order={2} ta='center' mb='md'>
+      <Title ta='center' mb='md'>
         Користувачі
       </Title>
       <UsersList />

@@ -21,7 +21,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <ActionIcon component={Link} href='/admin/users' variant='subtle' size='lg'>
           <ChevronLeft />
         </ActionIcon>
-        <Title order={2} ta='center' mb='md' className='flex-1'>
+        <Title ta='center' mb='md' className='flex-1'>
           Управління користувачем
         </Title>
       </Flex>

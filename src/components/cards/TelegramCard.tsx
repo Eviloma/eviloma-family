@@ -64,14 +64,17 @@ export default function TelegramCard() {
           {data.telegramID ? (
             <Stack gap='sm' align='center' my='auto'>
               <Group gap='sm' align='center'>
-                <Avatar src='avatar.png' alt='Avatar' size='xl' color='violet' />
+                <Avatar src={data.telegramAvatar} alt='Avatar' size='xl' color='violet' />
                 <Stack gap='4px' py='xs'>
                   <Text fw={600} size='lg'>
-                    Username
+                    {data.telegramUsername ?? '-'}
                   </Text>
-                  <Text c='dimmed'>123456789</Text>
+                  <Text c='dimmed'>{data.telegramID}</Text>
                 </Stack>
               </Group>
+              <Text size='xs' c='dimmed'>
+                Дані про телеграм акаунт оновлюються лише при підключені Telegram
+              </Text>
             </Stack>
           ) : (
             <Stack ta='center' className='flex-1 text-balance' gap='xs'>

@@ -39,13 +39,13 @@ export default function SubscriptionsList() {
     return (
       <Grid>
         <Grid.Col span={span}>
-          <Skeleton radius='md' height='150px' />
+          <Skeleton radius='md' height='200px' />
         </Grid.Col>
         <Grid.Col span={span}>
-          <Skeleton radius='md' height='150px' />
+          <Skeleton radius='md' height='200px' />
         </Grid.Col>
         <Grid.Col span={span}>
-          <Skeleton radius='md' height='150px' />
+          <Skeleton radius='md' height='200px' />
         </Grid.Col>
       </Grid>
     );

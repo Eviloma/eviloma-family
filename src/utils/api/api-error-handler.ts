@@ -7,7 +7,11 @@ import type { ApiError } from '@/types/api';
 export default function apiErrorHandler(_: NextRequest, error: unknown): NextResponse<ApiError> {
   if (error instanceof ApiErrorClass) {
     return NextResponse.json(
-      { error_message: error.message, detailed_error_message: error.detailedMessage },
+      {
+        error_message: error.message,
+        detailed_error_message: error.detailedMessage,
+        detailed_code: error.detailedCode,
+      },
       { status: error.code }
     );
   }
