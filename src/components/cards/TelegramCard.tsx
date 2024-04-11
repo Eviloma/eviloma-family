@@ -3,6 +3,7 @@
 import { ActionIcon, Avatar, Card, GridCol, Group, Skeleton, Stack, Text, Tooltip } from '@mantine/core';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { RefreshCcw } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 import TelegramIcon from '@/icons/Telegram';
@@ -64,10 +65,22 @@ export default function TelegramCard() {
           {data.telegramID ? (
             <Stack gap='sm' align='center' my='auto'>
               <Group gap='sm' align='center'>
-                <Avatar src={data.telegramAvatar} alt='Avatar' size='xl' color='violet' />
+                <Avatar
+                  src={`https://s3.eviloma.org/telegram/${data.telegramID}.jpg`}
+                  alt='Avatar'
+                  size='xl'
+                  color='violet'
+                />
                 <Stack gap='4px' py='xs'>
-                  <Text fw={600} size='lg'>
-                    {data.telegramUsername ?? '-'}
+                  <Text
+                    fw={600}
+                    size='lg'
+                    component={Link}
+                    href={`https://t.me/${data.telegramUsername}`}
+                    c='violet'
+                    target='_blank'
+                  >
+                    {data.telegramUsername ? `@${data.telegramUsername}` : '-'}
                   </Text>
                   <Text c='dimmed'>{data.telegramID}</Text>
                 </Stack>

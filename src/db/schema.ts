@@ -15,7 +15,6 @@ export const users = pgTable('users', {
   paymentLink: text('payment_link'),
   telegramID: text('telegram_id').unique(),
   telegramUsername: text('telegram_username'),
-  telegramAvatar: text('telegram_avatar'),
 });
 
 export const subscriptions = pgTable('subscriptions', {

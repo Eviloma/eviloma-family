@@ -55,7 +55,7 @@ export async function PUT(req: NextRequest) {
       throw ForbiddenError;
     }
 
-    const { token, telegramID, username, avatar } = await req.json();
+    const { token, telegramID, username } = await req.json();
 
     if (!token || !telegramID) {
       throw new ApiErrorClass(
@@ -88,7 +88,7 @@ export async function PUT(req: NextRequest) {
 
     const user = await db
       .update(users)
-      .set({ telegramID, telegramUsername: username, telegramAvatar: avatar })
+      .set({ telegramID, telegramUsername: username })
       .where(eq(users.id, tokenObject.user))
       .returning();
 
@@ -108,10 +108,7 @@ export async function DELETE(req: NextRequest): API<unknown> {
   try {
     const userInfo = await fetchUserInfo();
 
-    await db
-      .update(users)
-      .set({ telegramID: null, telegramUsername: null, telegramAvatar: null })
-      .where(eq(users.id, userInfo.sub));
+    await db.update(users).set({ telegramID: null, telegramUsername: null }).where(eq(users.id, userInfo.sub));
     return NextResponse.json({
       status: 'success',
     });

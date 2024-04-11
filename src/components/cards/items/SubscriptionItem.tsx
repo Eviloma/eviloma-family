@@ -20,7 +20,7 @@ export default function SubscriptionItem({ subscription }: IProps) {
           </Title>
           <Box w={{ base: '92%', xs: '100%' }}>
             <Text size='xs' c='dimmed' truncate='end'>
-              Наступна оплата: {dayjs().to(subscription.date)}
+              Наступна оплата: {dayjs().to(dayjs(subscription.date).set('hours', 12))}
             </Text>
           </Box>
         </Stack>

@@ -3,6 +3,7 @@ import React from 'react';
 
 import User from '@/types/user';
 
+import UserCard from './UserCard';
 import UserReadOnlyCard from './UserReadOnlyCard';
 
 interface IProps {
@@ -43,6 +44,15 @@ export default function UserProfileTab({ user }: IProps) {
             description='Баланс користувача'
             value={`${user.balance / 100} ₴`}
             bottomDescription='Баланс дозволено змінювати лише за допомогою транзакцій'
+          />
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 6, lg: 4, xl: 3 }}>
+          <UserCard
+            title='Оплата'
+            description='Посилання для оплати'
+            value={user.paymentLink}
+            userId={user.id}
+            route={`/api/users/${user.id}/payment-link`}
           />
         </Grid.Col>
       </Grid>

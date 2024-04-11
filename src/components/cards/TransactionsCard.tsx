@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Card, GridCol, Skeleton, Stack, Tooltip } from '@mantine/core';
+import { ActionIcon, Card, GridCol, Skeleton, Stack, Text, Tooltip } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import { map } from 'lodash';
 import { FileStack, ReceiptText } from 'lucide-react';
@@ -55,9 +55,11 @@ export default function TransactionsCard() {
         </Card.Section>
 
         <Stack gap='xs' mt='md' justify='space-between' h='100%'>
-          {map(data.transactions, (transaction) => (
-            <TransactionItem key={transaction.id} transaction={transaction} />
-          ))}
+          {data.transactions.length >= 1 ? (
+            map(data.transactions, (transaction) => <TransactionItem key={transaction.id} transaction={transaction} />)
+          ) : (
+            <Text ta='center'>Транзакцій не знайдено</Text>
+          )}
         </Stack>
       </Card>
     </GridCol>

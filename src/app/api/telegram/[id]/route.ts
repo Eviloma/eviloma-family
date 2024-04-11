@@ -44,10 +44,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       throw ForbiddenError;
     }
 
-    await db
-      .update(users)
-      .set({ telegramID: null, telegramUsername: null, telegramAvatar: null })
-      .where(eq(users.telegramID, params.id));
+    await db.update(users).set({ telegramID: null, telegramUsername: null }).where(eq(users.telegramID, params.id));
 
     return NextResponse.json({}, { status: 200 });
   } catch (error) {

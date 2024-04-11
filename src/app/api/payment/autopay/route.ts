@@ -1,4 +1,5 @@
 /* eslint-disable lodash/collection-method-value */
+import dayjs from 'dayjs';
 import { eq, lte, sql } from 'drizzle-orm';
 import { map } from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
@@ -46,6 +47,18 @@ export async function POST(req: NextRequest) {
 
       return Promise.all(
         map(subscriptions, async (subscription) => {
+          await tx
+            .update(subscriptionsSchema)
+            .set({
+              date: dayjs()
+                .add(1, 'month')
+                .set('hours', 0)
+                .set('minutes', 0)
+                .set('seconds', 0)
+                .set('milliseconds', 0)
+                .toDate(),
+            })
+            .where(eq(subscriptionsSchema.id, subscription.id));
           return Promise.all(
             map(subscription.users, async ({ user }) => {
               const transaction = await tx

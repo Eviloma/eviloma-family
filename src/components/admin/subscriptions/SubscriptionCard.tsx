@@ -32,7 +32,7 @@ export default function SubscriptionCard({ subscription }: IProps) {
 
       <Flex align='center' gap='sm' mt='md'>
         <CalendarClock />
-        <Text>{`Оплата ${dayjs().to(subscription.date)}`}</Text>
+        <Text>{`Оплата ${dayjs().to(dayjs(subscription.date).set('hours', 12))}`}</Text>
       </Flex>
 
       <Flex align='center' gap='sm' mt='md'>

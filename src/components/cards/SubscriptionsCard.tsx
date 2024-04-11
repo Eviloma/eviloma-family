@@ -2,7 +2,7 @@
 
 import 'dayjs/locale/uk';
 
-import { Card, GridCol, Skeleton, Stack } from '@mantine/core';
+import { Card, GridCol, Skeleton, Stack, Text } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -56,9 +56,13 @@ export default function SubscriptionsCard() {
         </Card.Section>
 
         <Stack gap='xs' mt='md' h='100%'>
-          {map(data.subscriptions, ({ subscription }) => (
-            <SubscriptionItem key={subscription.id} subscription={subscription} />
-          ))}
+          {data.subscriptions.length >= 1 ? (
+            map(data.subscriptions, ({ subscription }) => (
+              <SubscriptionItem key={subscription.id} subscription={subscription} />
+            ))
+          ) : (
+            <Text ta='center'>Підписок не знайдено</Text>
+          )}
         </Stack>
       </Card>
     </GridCol>
