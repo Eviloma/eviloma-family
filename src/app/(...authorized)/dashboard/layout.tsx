@@ -1,7 +1,7 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react';
+import type React from "react";
 
-import { getLogtoContext } from '@/utils/logto';
+import WarningUpdate from "@/components/WarningUpdate";
+import { getLogtoContext } from "@/utils/logto";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = await getLogtoContext();
@@ -9,5 +9,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
   if (!isAuthenticated) {
     return <div>Not authorized</div>;
   }
-  return <>{children}</>;
+  return (
+    <>
+      <WarningUpdate />
+      {children}
+    </>
+  );
 }

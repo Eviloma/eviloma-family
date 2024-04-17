@@ -1,13 +1,13 @@
-import { and, eq } from 'drizzle-orm';
-import { StatusCodes } from 'http-status-codes';
-import { NextRequest, NextResponse } from 'next/server';
+import { and, eq } from "drizzle-orm";
+import { StatusCodes } from "http-status-codes";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { ApiErrorClass } from '@/classes/ApiError';
-import db from '@/db';
-import { userOnSubscriptions } from '@/db/schema';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import fetchUserInfo from '@/utils/api/authorization-check';
-import { SCOPES } from '@/utils/consts';
+import { ApiErrorClass } from "@/classes/ApiError";
+import db from "@/db";
+import { userOnSubscriptions } from "@/db/schema";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import fetchUserInfo from "@/utils/api/authorization-check";
+import { SCOPES } from "@/utils/consts";
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string; subid: string } }) {
   try {
@@ -19,8 +19,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string; 
         subscriptionId: params.subid,
       })
       .catch((error) => {
-        if ('code' in error && error.code === '23505') {
-          throw new ApiErrorClass(StatusCodes.CONFLICT, 'Підписка вже додана раніше');
+        if ("code" in error && error.code === "23505") {
+          throw new ApiErrorClass(StatusCodes.CONFLICT, "Підписка вже додана раніше");
         }
         throw error;
       });

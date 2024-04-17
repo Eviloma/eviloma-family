@@ -1,12 +1,12 @@
-import { count, desc, eq } from 'drizzle-orm';
-import { NextRequest, NextResponse } from 'next/server';
+import { count, desc, eq } from "drizzle-orm";
+import { type NextRequest, NextResponse } from "next/server";
 
-import db from '@/db';
-import { transactions as transactionsSchema } from '@/db/schema';
-import { ApiWithMeta } from '@/types/api';
-import Transaction from '@/types/transaction';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import fetchUserInfo from '@/utils/api/authorization-check';
+import db from "@/db";
+import { transactions as transactionsSchema } from "@/db/schema";
+import type { ApiWithMeta } from "@/types/api";
+import type Transaction from "@/types/transaction";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import fetchUserInfo from "@/utils/api/authorization-check";
 
 export async function GET(req: NextRequest): ApiWithMeta<Transaction[] | null> {
   try {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest): ApiWithMeta<Transaction[] | null> {
 
     const { searchParams } = req.nextUrl;
 
-    const page = parseInt(searchParams.get('page') ?? '1', 10) ?? 1;
+    const page = Number.parseInt(searchParams.get("page") ?? "1", 10) ?? 1;
 
     const countResult = await db
       .select({ count: count() })
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest): ApiWithMeta<Transaction[] | null> {
 
     return NextResponse.json(
       { data: transactions.length === 0 ? null : transactions, meta: { total: countResult[0]?.count ?? 0, page } },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     return apiErrorHandler(req, err);

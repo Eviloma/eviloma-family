@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react';
+import type React from "react";
 
-import isAdmin from '@/utils/is-admin';
-import { getLogtoContext } from '@/utils/logto';
+import isAdmin from "@/utils/is-admin";
+import { getLogtoContext } from "@/utils/logto";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const { scopes } = await getLogtoContext({ getAccessToken: true });

@@ -1,36 +1,36 @@
-import { Banknote, CircleHelp } from 'lucide-react';
-import React from 'react';
+import { Banknote, CircleHelp } from "lucide-react";
+import React from "react";
 
-import SpotifyIcon from '@/icons/Spotify';
-import YoutubeIcon from '@/icons/Youtube';
-import { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from '@/utils/consts';
+import SpotifyIcon from "@/icons/Spotify";
+import YoutubeIcon from "@/icons/Youtube";
+import type { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from "@/utils/consts";
 
-import SelectItemWithIcon from './SelectItemWithIcon';
+import SelectItemWithIcon from "./SelectItemWithIcon";
 
 interface IProps {
   category: (typeof SUBSCRIPTION_CATEGORIES)[number] | (typeof TRANSACTION_CATEGORIES)[number];
 }
 
-export function getCategoryData(category: IProps['category']) {
+export function getCategoryData(category: IProps["category"]) {
   switch (category) {
-    case 'Youtube':
+    case "Youtube":
       return {
-        label: 'Youtube',
-        icon: <YoutubeIcon width={24} height={24} fill='#ff0000' />,
+        label: "Youtube",
+        icon: <YoutubeIcon width={24} height={24} fill="#ff0000" />,
       };
-    case 'Spotify':
+    case "Spotify":
       return {
-        label: 'Spotify',
-        icon: <SpotifyIcon width={24} height={24} fill='#1DB954' />,
+        label: "Spotify",
+        icon: <SpotifyIcon width={24} height={24} fill="#1DB954" />,
       };
-    case 'Deposit':
+    case "Deposit":
       return {
-        label: 'Deposit',
-        icon: <Banknote width={24} height={24} className='text-[var(--mantine-color-violet-5)]' />,
+        label: "Deposit",
+        icon: <Banknote width={24} height={24} className="text-[var(--mantine-color-violet-5)]" />,
       };
     default:
       return {
-        label: 'Інше',
+        label: "Інше",
         icon: <CircleHelp />,
       };
   }

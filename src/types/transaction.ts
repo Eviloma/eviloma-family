@@ -1,4 +1,4 @@
-import { transactions } from '@/db/schema';
+import type { transactions } from "@/db/schema";
 
 type Transaction = typeof transactions.$inferSelect;
 

@@ -1,10 +1,10 @@
-'use server';
+"use server";
 
-import LogtoClient from '@logto/next/server-actions';
-import { GetContextParameters } from '@logto/node';
-import { cookies } from 'next/headers';
+import LogtoClient from "@logto/next/server-actions";
+import type { GetContextParameters } from "@logto/node";
+import { cookies } from "next/headers";
 
-import { env } from '@/env';
+import { env } from "@/env";
 
 const config = {
   appId: env.LOGTO_APP_ID,
@@ -12,8 +12,8 @@ const config = {
   endpoint: env.LOGTO_ENDPOINT,
   baseUrl: env.VERCEL_URL ?? env.BASE_URL,
   cookieSecret: env.LOGTO_COOKIE_SECRET,
-  cookieSecure: env.NODE_ENV === 'production',
-  scopes: ['email', 'admin:family'],
+  cookieSecure: env.NODE_ENV === "production",
+  scopes: ["email", "admin:family"],
   resources: [`${env.VERCEL_URL ?? env.BASE_URL}/api`],
 };
 
@@ -33,7 +33,7 @@ const setCookies = (value?: string) => {
 };
 
 const getCookie = () => {
-  return cookies().get(cookieName)?.value ?? '';
+  return cookies().get(cookieName)?.value ?? "";
 };
 
 export const signIn = async () => {
@@ -55,7 +55,7 @@ export const handleSignIn = async (searchParams: URLSearchParams) => {
 export const signOut = async () => {
   const url = await logtoClient.handleSignOut(getCookie(), `${config.baseUrl}/`);
 
-  setCookies('');
+  setCookies("");
 
   return url;
 };

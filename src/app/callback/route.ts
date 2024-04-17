@@ -1,8 +1,8 @@
-import { LogtoError } from '@logto/node';
-import { redirect } from 'next/navigation';
-import { NextRequest } from 'next/server';
+import { LogtoError } from "@logto/node";
+import { redirect } from "next/navigation";
+import type { NextRequest } from "next/server";
 
-import { handleSignIn } from '@/utils/logto';
+import { handleSignIn } from "@/utils/logto";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,5 +13,5 @@ export async function GET(request: NextRequest) {
       redirect(`/?error=${error.code}`);
     }
   }
-  redirect('/');
+  redirect("/");
 }

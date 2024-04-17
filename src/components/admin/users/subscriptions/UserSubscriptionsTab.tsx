@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import 'dayjs/locale/uk';
+import "dayjs/locale/uk";
 
-import { Center, Grid, Group, Skeleton, Stack } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { map } from 'lodash';
-import React from 'react';
+import { Center, Grid, Group, Skeleton, Stack } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { map } from "lodash";
+import React from "react";
 
-import ErrorAlert from '@/components/alerts/ErrorAlert';
-import Subscription from '@/types/subscription';
-import User from '@/types/user';
-import QueryRequest from '@/utils/query-request';
+import ErrorAlert from "@/components/alerts/ErrorAlert";
+import type Subscription from "@/types/subscription";
+import type User from "@/types/user";
+import QueryRequest from "@/utils/query-request";
 
-import AddSubscriptionButton from './AddSubscriptionButton';
-import SubscriptionCard from './SubscriptionCard';
+import AddSubscriptionButton from "./AddSubscriptionButton";
+import SubscriptionCard from "./SubscriptionCard";
 
 interface IProps {
   user: User;
 }
 
 dayjs.extend(relativeTime);
-dayjs.locale('uk');
+dayjs.locale("uk");
 
 export default function UserSubscriptionsTab({ user }: IProps) {
   const { data, error, isLoading } = useQuery<Subscription[]>({
@@ -30,26 +30,26 @@ export default function UserSubscriptionsTab({ user }: IProps) {
     queryFn: () =>
       QueryRequest({
         link: `/api/users/${user.id}/subscriptions`,
-        method: 'GET',
+        method: "GET",
       }),
   });
 
   if (isLoading) {
-    return <Skeleton animate w='100%' h='350px' />;
+    return <Skeleton animate w="100%" h="350px" />;
   }
 
   if (!data) {
     return (
       <Center>
-        <ErrorAlert title='Помилка' description={error?.message ?? 'Помилка сервера'} />
+        <ErrorAlert title="Помилка" description={error?.message ?? "Помилка сервера"} />
       </Center>
     );
   }
 
   return (
-    <Stack gap='sm' w='100%'>
-      <Group justify='end'>
-        <AddSubscriptionButton id={user.id} userSubscriptionIds={map(data, 'id')} />
+    <Stack gap="sm" w="100%">
+      <Group justify="end">
+        <AddSubscriptionButton id={user.id} userSubscriptionIds={map(data, "id")} />
       </Group>
       <Grid>
         {map(data, (subscription) => (

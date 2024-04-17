@@ -1,10 +1,10 @@
-import { Title } from '@mantine/core';
-import { Metadata } from 'next/types';
-import React from 'react';
+import { Title } from "@mantine/core";
+import type { Metadata } from "next/types";
+import React from "react";
 
-import UserTransactions from '@/components/UserTransactions';
+import UserTransactions from "@/components/UserTransactions";
 
-const PAGE_TITLE = 'Транзакції';
+const PAGE_TITLE = "Транзакції";
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   openGraph: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <Title ta='center' mb='md'>
+      <Title ta="center" mb="md">
         Транзакції
       </Title>
       <UserTransactions />

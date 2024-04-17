@@ -1,9 +1,9 @@
-import { QueryClient } from '@tanstack/react-query';
-import { includes } from 'lodash';
+import { QueryClient } from "@tanstack/react-query";
+import { includes } from "lodash";
 
-import ErrorWithCode from '@/classes/ErrorWithCode';
+import ErrorWithCode from "@/classes/ErrorWithCode";
 
-import { DONT_RETRY_STATUS_CODES, MAX_RETRY_ATTEMPTS } from './consts';
+import { DONT_RETRY_STATUS_CODES, MAX_RETRY_ATTEMPTS } from "./consts";
 
 let browserQueryClient: QueryClient | undefined;
 
@@ -25,7 +25,7 @@ function makeQueryClient() {
 }
 
 export default function getQueryClient() {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server: always make a new query client
     return makeQueryClient();
   }

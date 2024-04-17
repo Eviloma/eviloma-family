@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { MenuItem } from '@mantine/core';
-import { LogOut } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import { MenuItem } from "@mantine/core";
+import { LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React from "react";
 
-import { signOut } from '@/utils/logto';
+import { signOut } from "@/utils/logto";
 
 interface IProps {
   iconProps: object;
@@ -21,7 +21,7 @@ function SignOutMenuItem({ iconProps }: IProps) {
   };
 
   return (
-    <MenuItem color='red' onClick={handleClick} leftSection={<LogOut {...iconProps} />}>
+    <MenuItem color="red" onClick={handleClick} leftSection={<LogOut {...iconProps} />}>
       Вийти
     </MenuItem>
   );

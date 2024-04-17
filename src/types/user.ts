@@ -1,6 +1,6 @@
-import { transactions, users } from '@/db/schema';
+import type { transactions, users } from "@/db/schema";
 
-import Subscription from './subscription';
+import type Subscription from "./subscription";
 
 type User = typeof users.$inferSelect & {
   email: string;

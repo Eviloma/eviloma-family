@@ -1,30 +1,30 @@
-import { eq, sql } from 'drizzle-orm';
-import { StatusCodes } from 'http-status-codes';
-import { NextRequest, NextResponse } from 'next/server';
+import { eq, sql } from "drizzle-orm";
+import { StatusCodes } from "http-status-codes";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { ApiErrorClass, ForbiddenError } from '@/classes/ApiError';
-import db from '@/db';
-import { transactions, users } from '@/db/schema';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import sendDepositNotification from '@/utils/telegram/deposit';
+import { ApiErrorClass, ForbiddenError } from "@/classes/ApiError";
+import db from "@/db";
+import { transactions, users } from "@/db/schema";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import sendDepositNotification from "@/utils/telegram/deposit";
 
 export async function POST(req: NextRequest) {
   try {
-    const authorization = req.headers.get('Authorization');
+    const authorization = req.headers.get("Authorization");
 
     if (!authorization || authorization !== `Bearer ${process.env.PAYMENT_API_KEY}`) {
-      throw ForbiddenError;
+      throw ForbiddenError();
     }
 
     const { id, suma } = await req.json();
 
     if (!id || !suma) {
-      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Один або декілька полів не заповнено');
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Один або декілька полів не заповнено");
     }
 
     await db.insert(transactions).values({
-      title: 'Поповнення балансу',
-      category: 'Deposit',
+      title: "Поповнення балансу",
+      category: "Deposit",
       suma,
       user: id,
     });

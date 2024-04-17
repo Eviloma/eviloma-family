@@ -1,18 +1,18 @@
-import { eq } from 'drizzle-orm';
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { eq } from "drizzle-orm";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-import { ForbiddenError } from '@/classes/ApiError';
-import db from '@/db';
-import { users } from '@/db/schema';
-import apiErrorHandler from '@/utils/api/api-error-handler';
+import { ForbiddenError, UserNotFoundError } from "@/classes/ApiError";
+import db from "@/db";
+import { users } from "@/db/schema";
+import apiErrorHandler from "@/utils/api/api-error-handler";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const authorization = req.headers.get('Authorization');
+    const authorization = req.headers.get("Authorization");
 
     if (!authorization || authorization !== `Bearer ${process.env.TELEGRAM_API_KEY}`) {
-      throw ForbiddenError;
+      throw ForbiddenError();
     }
 
     const user = await db.query.users.findFirst({
@@ -29,7 +29,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     });
 
     if (!user) {
-      return NextResponse.json({ error: 'Користувача не знайдено' }, { status: 400 });
+      throw UserNotFoundError({
+        telegram: "Помилка😞\nℹ️ Схоже, що ваш Telegram не підключено до сайту Eviloma Family.",
+      });
     }
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
@@ -39,9 +41,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const authorization = req.headers.get('Authorization');
+    const authorization = req.headers.get("Authorization");
     if (!authorization || authorization !== `Bearer ${process.env.TELEGRAM_API_KEY}`) {
-      throw ForbiddenError;
+      throw ForbiddenError();
     }
 
     await db.update(users).set({ telegramID: null, telegramUsername: null }).where(eq(users.telegramID, params.id));

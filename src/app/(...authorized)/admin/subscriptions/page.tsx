@@ -1,11 +1,11 @@
-import { Title } from '@mantine/core';
-import { Metadata } from 'next/types';
-import React from 'react';
+import { Title } from "@mantine/core";
+import type { Metadata } from "next/types";
+import React from "react";
 
-import CreateSubscriptionButton from '@/components/admin/subscriptions/CreateSubscriptionButton';
-import SubscriptionsList from '@/components/admin/subscriptions/SubscriptionsList';
+import CreateSubscriptionButton from "@/components/admin/subscriptions/CreateSubscriptionButton";
+import SubscriptionsList from "@/components/admin/subscriptions/SubscriptionsList";
 
-const PAGE_TITLE = 'Управління підписками';
+const PAGE_TITLE = "Управління підписками";
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   openGraph: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <Title ta='center' mb='md'>
+      <Title ta="center" mb="md">
         Підписки
       </Title>
       <CreateSubscriptionButton />

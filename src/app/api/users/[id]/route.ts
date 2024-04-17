@@ -1,15 +1,15 @@
-import { eq } from 'drizzle-orm';
-import { StatusCodes } from 'http-status-codes';
-import { NextRequest, NextResponse } from 'next/server';
+import { eq } from "drizzle-orm";
+import { StatusCodes } from "http-status-codes";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { ApiErrorClass } from '@/classes/ApiError';
-import db from '@/db';
-import { users } from '@/db/schema';
-import API from '@/types/api';
-import User from '@/types/user';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import fetchUserInfo from '@/utils/api/authorization-check';
-import { SCOPES } from '@/utils/consts';
+import { ApiErrorClass } from "@/classes/ApiError";
+import db from "@/db";
+import { users } from "@/db/schema";
+import type API from "@/types/api";
+import type User from "@/types/user";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import fetchUserInfo from "@/utils/api/authorization-check";
+import { SCOPES } from "@/utils/consts";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }): API<User> {
   try {
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const user = await db.query.users.findFirst({ where: eq(users.id, params.id) });
 
     if (!user) {
-      throw new ApiErrorClass(StatusCodes.NOT_FOUND, 'Користувача не знайдено');
+      throw new ApiErrorClass(StatusCodes.NOT_FOUND, "Користувача не знайдено");
     }
 
     return NextResponse.json(user, { status: 200 });

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { Button } from '@mantine/core';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import { Button } from "@mantine/core";
+import { useRouter } from "next/navigation";
+import React from "react";
 
-import { signIn } from '@/utils/logto';
+import { signIn } from "@/utils/logto";
 
 interface IProps {
   label?: string;
@@ -19,5 +19,5 @@ export default function SignInButton({ label }: IProps) {
     router.push(redirectUrl);
   };
 
-  return <Button onClick={handleClick}>{label ?? 'Увійти'}</Button>;
+  return <Button onClick={handleClick}>{label ?? "Увійти"}</Button>;
 }

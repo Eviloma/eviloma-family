@@ -1,14 +1,13 @@
-/* eslint-disable lodash/collection-method-value */
-import dayjs from 'dayjs';
-import { eq, lte, sql } from 'drizzle-orm';
-import { map } from 'lodash';
-import { NextRequest, NextResponse } from 'next/server';
+import dayjs from "dayjs";
+import { eq, lte, sql } from "drizzle-orm";
+import { map } from "lodash";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { ForbiddenError } from '@/classes/ApiError';
-import db from '@/db';
-import { subscriptions as subscriptionsSchema, transactions, users } from '@/db/schema';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import sendSubPaymentNotification from '@/utils/telegram/sub-payment';
+import { ForbiddenError } from "@/classes/ApiError";
+import db from "@/db";
+import { subscriptions as subscriptionsSchema, transactions, users } from "@/db/schema";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import sendSubPaymentNotification from "@/utils/telegram/sub-payment";
 
 interface Log {
   user: {
@@ -26,10 +25,10 @@ interface Log {
 
 export async function POST(req: NextRequest) {
   try {
-    const authorization = req.headers.get('Authorization');
+    const authorization = req.headers.get("Authorization");
 
     if (!authorization || authorization !== `Bearer ${process.env.PAYMENT_API_KEY}`) {
-      throw ForbiddenError;
+      throw ForbiddenError();
     }
 
     const logs = await db.transaction(async (tx) => {
@@ -51,11 +50,11 @@ export async function POST(req: NextRequest) {
             .update(subscriptionsSchema)
             .set({
               date: dayjs()
-                .add(1, 'month')
-                .set('hours', 0)
-                .set('minutes', 0)
-                .set('seconds', 0)
-                .set('milliseconds', 0)
+                .add(1, "month")
+                .set("hours", 0)
+                .set("minutes", 0)
+                .set("seconds", 0)
+                .set("milliseconds", 0)
                 .toDate(),
             })
             .where(eq(subscriptionsSchema.id, subscription.id));
@@ -88,11 +87,11 @@ export async function POST(req: NextRequest) {
                   title: subscription.title,
                 },
                 telegram: !!user.telegramID,
-                transactionId: transaction[0]?.id ?? '',
+                transactionId: transaction[0]?.id ?? "",
               } as Log;
-            })
+            }),
           );
-        })
+        }),
       );
     });
     return NextResponse.json({ logs }, { status: 200 });

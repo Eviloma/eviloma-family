@@ -1,12 +1,12 @@
-import { ActionIcon, Flex, Title } from '@mantine/core';
-import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
-import { Metadata } from 'next/types';
-import React from 'react';
+import { ActionIcon, Flex, Title } from "@mantine/core";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import type { Metadata } from "next/types";
+import React from "react";
 
-import UserSettings from '@/components/admin/users/UserSettings';
+import UserSettings from "@/components/admin/users/UserSettings";
 
-const PAGE_TITLE = 'Управління користувачем';
+const PAGE_TITLE = "Управління користувачем";
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   openGraph: {
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
-      <Flex direction='row'>
-        <ActionIcon component={Link} href='/admin/users' variant='subtle' size='lg'>
+      <Flex direction="row">
+        <ActionIcon component={Link} href="/admin/users" variant="subtle" size="lg">
           <ChevronLeft />
         </ActionIcon>
-        <Title ta='center' mb='md' className='flex-1'>
+        <Title ta="center" mb="md" className="flex-1">
           Управління користувачем
         </Title>
       </Flex>

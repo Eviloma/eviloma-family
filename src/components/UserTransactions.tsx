@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { forEach } from 'lodash';
-import React, { useMemo } from 'react';
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { forEach } from "lodash";
+import React, { useMemo } from "react";
 
-import Transaction from '@/types/transaction';
-import QueryRequest from '@/utils/query-request';
+import type Transaction from "@/types/transaction";
+import QueryRequest from "@/utils/query-request";
 
-import TransactionsTable from './transactions/TransactionsTable';
+import TransactionsTable from "./transactions/TransactionsTable";
 
 export default function UserTransactions() {
   const { data, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery<{
     data: Transaction[];
     meta: { page: number; total: number };
   }>({
-    queryKey: [`user-transactions`],
+    queryKey: ["user-transactions"],
     queryFn: ({ pageParam }) =>
       QueryRequest({
         link: `/api/user/transactions?page=${pageParam}`,
-        method: 'GET',
+        method: "GET",
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.meta.page + 1,

@@ -1,16 +1,16 @@
-import dayjs from 'dayjs';
-import { StatusCodes } from 'http-status-codes';
-import { includes, join } from 'lodash';
-import { NextRequest, NextResponse } from 'next/server';
+import dayjs from "dayjs";
+import { StatusCodes } from "http-status-codes";
+import { includes, join } from "lodash";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { ApiErrorClass } from '@/classes/ApiError';
-import db from '@/db';
-import { subscriptions } from '@/db/schema';
-import API from '@/types/api';
-import Subscription from '@/types/subscription';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import fetchUserInfo from '@/utils/api/authorization-check';
-import { SCOPES, SUBSCRIPTION_CATEGORIES } from '@/utils/consts';
+import { ApiErrorClass } from "@/classes/ApiError";
+import db from "@/db";
+import { subscriptions } from "@/db/schema";
+import type API from "@/types/api";
+import type Subscription from "@/types/subscription";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import fetchUserInfo from "@/utils/api/authorization-check";
+import { SCOPES, SUBSCRIPTION_CATEGORIES } from "@/utils/consts";
 
 export async function GET(req: NextRequest): API<Subscription[]> {
   try {
@@ -28,31 +28,29 @@ export async function POST(req: NextRequest) {
     const { title, category, price, date } = await req.json();
 
     if (!title || title.length < 3) {
-      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Назва підписки не може бути менше 3 символів');
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Назва підписки не може бути менше 3 символів");
     }
 
     if (!category || !includes(SUBSCRIPTION_CATEGORIES, category)) {
-      throw new ApiErrorClass(
-        StatusCodes.BAD_REQUEST,
-        'Невірна категорія підписки',
-        `Дозволені категорії: ${join(SUBSCRIPTION_CATEGORIES, ', ')}`
-      );
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Невірна категорія підписки", {
+        message: `Дозволені категорії: ${join(SUBSCRIPTION_CATEGORIES, ", ")}`,
+      });
     }
 
     if (!price || Number.isNaN(price) || price < 0.01) {
-      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Ціна підписки не може бути менше 0.01 ₴');
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Ціна підписки не може бути менше 0.01 ₴");
     }
 
     if (!date) {
-      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Дата підписки не може бути порожньою');
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Дата підписки не може бути порожньою");
     }
 
     if (!dayjs(date).isValid()) {
-      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Не вдалось перевірити дату підписки');
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Не вдалось перевірити дату підписки");
     }
 
-    if (dayjs(date).isBefore(dayjs().subtract(1, 'day'))) {
-      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, 'Дата підписки не може бути в минулому');
+    if (dayjs(date).isBefore(dayjs().subtract(1, "day"))) {
+      throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Дата підписки не може бути в минулому");
     }
 
     const subscription = await db
@@ -66,7 +64,7 @@ export async function POST(req: NextRequest) {
       .returning();
 
     if (!subscription[0]) {
-      throw new ApiErrorClass(StatusCodes.INTERNAL_SERVER_ERROR, 'Помилка створення підписки');
+      throw new ApiErrorClass(StatusCodes.INTERNAL_SERVER_ERROR, "Помилка створення підписки");
     }
 
     return NextResponse.json({});

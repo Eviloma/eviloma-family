@@ -1,7 +1,8 @@
-import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
-import React, { forwardRef } from 'react';
+import { Avatar, Group, Text, UnstyledButton } from "@mantine/core";
+import type React from "react";
+import { forwardRef } from "react";
 
-interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+interface UserButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   image: string;
   name: string;
   email: string;
@@ -12,27 +13,27 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
     <UnstyledButton
       ref={ref}
       style={{
-        padding: 'var(--mantine-spacing-xs)',
-        borderRadius: 'var(--mantine-radius-md)',
+        padding: "var(--mantine-spacing-xs)",
+        borderRadius: "var(--mantine-radius-md)",
       }}
-      className='duration-300 hover:bg-[var(--mantine-color-dark-6)]'
+      className="duration-300 hover:bg-[var(--mantine-color-dark-6)]"
       {...others}
     >
-      <Group gap='xs'>
-        <Avatar src={image} radius='xl' />
+      <Group gap="xs">
+        <Avatar src={image} radius="xl" />
 
-        <div className='flex-1'>
-          <Text size='sm' fw={500} maw='125px' truncate>
+        <div className="flex-1">
+          <Text size="sm" fw={500} maw="125px" truncate>
             {name}
           </Text>
 
-          <Text c='dimmed' size='xs' maw='125px' truncate>
+          <Text c="dimmed" size="xs" maw="125px" truncate>
             {email}
           </Text>
         </div>
       </Group>
     </UnstyledButton>
-  )
+  ),
 );
 
 export default UserButton;

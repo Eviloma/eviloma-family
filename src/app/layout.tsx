@@ -1,25 +1,23 @@
-import '@mantine/core/styles.layer.css';
-import '@mantine/notifications/styles.css';
-import 'mantine-datatable/styles.layer.css';
-import '@mantine/dates/styles.layer.css';
-import '@mantine/carousel/styles.layer.css';
-import './globals.css';
+import "@mantine/core/styles.layer.css";
+import "@mantine/dates/styles.layer.css";
+import "@mantine/notifications/styles.css";
+import "mantine-datatable/styles.layer.css";
+import "./globals.css";
 
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
-import { type Metadata, Viewport } from 'next';
-import { Raleway } from 'next/font/google';
-import React from 'react';
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+import type { Metadata, Viewport } from "next";
+import { Raleway } from "next/font/google";
+import type React from "react";
 
-import LogtoErrorNotificator from '@/components/LogtoErrorNotificator';
-import NavBar from '@/components/navbar/NavBar';
-import NavigationProgress from '@/components/NavigationProgress';
-import PWAInstaller from '@/components/PWABanner';
-import ReactQueryProvider from '@/components/ReactQueryProvider';
-import { META } from '@/utils/consts';
-import theme from '@/utils/theme';
+import LogtoErrorNotificator from "@/components/LogtoErrorNotificator";
+import NavigationProgress from "@/components/NavigationProgress";
+import ReactQueryProvider from "@/components/ReactQueryProvider";
+import NavBar from "@/components/navbar/NavBar";
+import { META } from "@/utils/consts";
+import theme from "@/utils/theme";
 
-const raleway = Raleway({ subsets: ['cyrillic-ext', 'latin-ext'] });
+const raleway = Raleway({ subsets: ["cyrillic-ext", "latin-ext"] });
 
 export const metadata: Metadata = {
   title: {
@@ -28,20 +26,20 @@ export const metadata: Metadata = {
   },
   description: META.description,
   applicationName: META.title,
-  authors: [{ name: 'HighError', url: 'https://github.com/higherror' }],
-  generator: 'Next.js',
-  creator: 'Eviloma',
-  publisher: 'Eviloma',
-  robots: '/robot.txt',
+  authors: [{ name: "HighError", url: "https://github.com/higherror" }],
+  generator: "Next.js",
+  creator: "Eviloma",
+  publisher: "Eviloma",
+  robots: "/robot.txt",
   icons: [
-    { rel: 'apple-touch-icon', sizes: '180x180', url: '/icons/apple-touch-icon.png' },
-    { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/icons/favicon-32x32.png' },
-    { rel: 'icon', type: 'image/png', sizes: '16x16', url: '/icons/favicon-16x16.png' },
-    { rel: 'mask-icon', type: 'image/png', color: '#594f6d', url: '/icons/safari-pinned-tab.svg' },
+    { rel: "apple-touch-icon", sizes: "180x180", url: "/icons/apple-touch-icon.png" },
+    { rel: "icon", type: "image/png", sizes: "32x32", url: "/icons/favicon-32x32.png" },
+    { rel: "icon", type: "image/png", sizes: "16x16", url: "/icons/favicon-16x16.png" },
+    { rel: "mask-icon", type: "image/png", color: "#594f6d", url: "/icons/safari-pinned-tab.svg" },
   ],
-  manifest: '/manifest.json',
+  manifest: "/manifest.json",
   openGraph: {
-    type: 'website',
+    type: "website",
     siteName: META.title,
     title: {
       default: META.title,
@@ -50,7 +48,7 @@ export const metadata: Metadata = {
     description: META.description,
   },
   twitter: {
-    card: 'summary',
+    card: "summary",
     title: {
       default: META.title,
       template: META.title_template,
@@ -59,29 +57,28 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBarStyle: "default",
     title: META.title,
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#b09af8',
-  colorScheme: 'dark',
-  width: 'device-width',
+  themeColor: "#b09af8",
+  colorScheme: "dark",
+  width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='uk'>
+    <html lang="uk">
       <head>
-        <ColorSchemeScript defaultColorScheme='dark' forceColorScheme='dark' />
+        <ColorSchemeScript defaultColorScheme="dark" forceColorScheme="dark" />
       </head>
       <body className={`${raleway.className} min-h-dvh px-4`}>
         <ReactQueryProvider>
-          <MantineProvider theme={theme} defaultColorScheme='dark' forceColorScheme='dark' withGlobalClasses>
-            <PWAInstaller />
-            <Notifications position='top-right' />
+          <MantineProvider theme={theme} defaultColorScheme="dark" forceColorScheme="dark" withGlobalClasses>
+            <Notifications position="top-right" />
             <NavigationProgress />
             <LogtoErrorNotificator />
             <NavBar />

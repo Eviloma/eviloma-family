@@ -1,12 +1,13 @@
-import { desc, eq } from 'drizzle-orm';
-import { NextRequest, NextResponse } from 'next/server';
+import { desc, eq } from "drizzle-orm";
+import { type NextRequest, NextResponse } from "next/server";
 
-import db from '@/db';
-import { transactions, users } from '@/db/schema';
-import API from '@/types/api';
-import { ExtendedUser } from '@/types/user';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import fetchUserInfo from '@/utils/api/authorization-check';
+import { UserNotFoundError } from "@/classes/ApiError";
+import db from "@/db";
+import { transactions, users } from "@/db/schema";
+import type API from "@/types/api";
+import type { ExtendedUser } from "@/types/user";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import fetchUserInfo from "@/utils/api/authorization-check";
 
 export async function GET(req: NextRequest): API<ExtendedUser> {
   try {
@@ -18,7 +19,7 @@ export async function GET(req: NextRequest): API<ExtendedUser> {
       await db.insert(users).values({
         id: userInfo.sub,
         username: userInfo.username,
-        email: userInfo.email!,
+        email: userInfo.email ?? "",
         avatar: userInfo.picture,
       });
     }
@@ -40,12 +41,12 @@ export async function GET(req: NextRequest): API<ExtendedUser> {
     });
 
     if (!user) {
-      throw new Error('Unknown error');
+      throw UserNotFoundError();
     }
 
     return NextResponse.json({
       ...user,
-      email: userInfo.email!,
+      email: userInfo.email ?? "",
       username: userInfo.username ?? null,
       avatar: userInfo.picture ?? null,
     });

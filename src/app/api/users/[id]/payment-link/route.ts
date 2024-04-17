@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 
-import db from '@/db';
-import { users } from '@/db/schema';
-import apiErrorHandler from '@/utils/api/api-error-handler';
-import fetchUserInfo from '@/utils/api/authorization-check';
-import { SCOPES } from '@/utils/consts';
+import db from "@/db";
+import { users } from "@/db/schema";
+import apiErrorHandler from "@/utils/api/api-error-handler";
+import fetchUserInfo from "@/utils/api/authorization-check";
+import { SCOPES } from "@/utils/consts";
 
 export async function POST(req: NextRequest) {
   try {

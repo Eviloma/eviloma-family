@@ -1,9 +1,9 @@
-import { Box, MantineColor, StyleProp } from '@mantine/core';
-import React from 'react';
+import { Box, type MantineColor, type StyleProp } from "@mantine/core";
+import React from "react";
 
-import { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from '@/utils/consts';
+import type { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from "@/utils/consts";
 
-import { getCategoryData } from './admin/CategoryItem';
+import { getCategoryData } from "./admin/CategoryItem";
 
 interface IProps {
   category: (typeof SUBSCRIPTION_CATEGORIES)[number] | (typeof TRANSACTION_CATEGORIES)[number];
@@ -12,7 +12,7 @@ interface IProps {
 
 export default function CategoryIcon({ category, bg }: IProps) {
   return (
-    <Box bg={bg ?? 'dark.7'} p='xs' className='flex items-center justify-center rounded-full'>
+    <Box bg={bg ?? "dark.7"} p="xs" className="flex items-center justify-center rounded-full">
       {getCategoryData(category).icon}
     </Box>
   );

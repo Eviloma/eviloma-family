@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import type { NextResponse } from "next/server";
 
-import Meta from './meta';
+import type Meta from "./meta";
 
 export type ApiError = {
   error_message: string;
