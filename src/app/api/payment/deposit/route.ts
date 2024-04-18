@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     await db.insert(transactions).values({
-      title: "Поповнення балансу",
+      title: "Поповнення рахунку",
       category: "Deposit",
       suma,
       user: id,
