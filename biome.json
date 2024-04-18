@@ -3,6 +3,9 @@
   "organizeImports": {
     "enabled": true
   },
+  "files": {
+    "ignore": ["./drizzle/*"]
+  },
   "linter": {
     "enabled": true,
     "rules": {

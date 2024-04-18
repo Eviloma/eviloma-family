@@ -1,5 +1,5 @@
 {
-  "id": "7d905834-ba6a-4a05-8804-47529990daf7",
+  "id": "181a405b-44fb-4053-948c-0f3b14979fc1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -48,12 +48,16 @@
         "subscriptions_id_unique": {
           "name": "subscriptions_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         },
         "subscriptions_title_unique": {
           "name": "subscriptions_title_unique",
           "nullsNotDistinct": false,
-          "columns": ["title"]
+          "columns": [
+            "title"
+          ]
         }
       }
     },
@@ -84,7 +88,7 @@
           "name": "valid_until",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now() + INTERVAL '15 minutes'"
         }
       },
@@ -94,8 +98,12 @@
           "name": "telegram_link_tokens_user_users_id_fk",
           "tableFrom": "telegram_link_tokens",
           "tableTo": "users",
-          "columnsFrom": ["user"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -105,17 +113,23 @@
         "telegram_link_tokens_id_unique": {
           "name": "telegram_link_tokens_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         },
         "telegram_link_tokens_user_unique": {
           "name": "telegram_link_tokens_user_unique",
           "nullsNotDistinct": false,
-          "columns": ["user"]
+          "columns": [
+            "user"
+          ]
         },
         "telegram_link_tokens_token_unique": {
           "name": "telegram_link_tokens_token_unique",
           "nullsNotDistinct": false,
-          "columns": ["token"]
+          "columns": [
+            "token"
+          ]
         }
       }
     },
@@ -169,8 +183,12 @@
           "name": "transactions_user_users_id_fk",
           "tableFrom": "transactions",
           "tableTo": "users",
-          "columnsFrom": ["user"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -180,7 +198,9 @@
         "transactions_id_unique": {
           "name": "transactions_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         }
       }
     },
@@ -207,8 +227,12 @@
           "name": "user_subscriptions_user_id_users_id_fk",
           "tableFrom": "user_subscriptions",
           "tableTo": "users",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -216,8 +240,12 @@
           "name": "user_subscriptions_subscription_id_subscriptions_id_fk",
           "tableFrom": "user_subscriptions",
           "tableTo": "subscriptions",
-          "columnsFrom": ["subscription_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "subscription_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -225,7 +253,10 @@
       "compositePrimaryKeys": {
         "user_subscriptions_user_id_subscription_id_pk": {
           "name": "user_subscriptions_user_id_subscription_id_pk",
-          "columns": ["user_id", "subscription_id"]
+          "columns": [
+            "user_id",
+            "subscription_id"
+          ]
         }
       },
       "uniqueConstraints": {}
@@ -276,6 +307,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "telegram_username": {
+          "name": "telegram_username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -285,17 +322,23 @@
         "users_id_unique": {
           "name": "users_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         },
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         },
         "users_telegram_id_unique": {
           "name": "users_telegram_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["telegram_id"]
+          "columns": [
+            "telegram_id"
+          ]
         }
       }
     }

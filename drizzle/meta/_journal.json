@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1711369722947,
-      "tag": "0000_previous_excalibur",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1711637664126,
-      "tag": "0001_real_red_ghost",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1712840964974,
-      "tag": "0002_same_marvel_apes",
+      "when": 1713449192351,
+      "tag": "0000_tidy_shard",
       "breakpoints": true
     }
   ]

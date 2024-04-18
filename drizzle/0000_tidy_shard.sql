@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "telegram_link_tokens" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"user" text NOT NULL,
 	"token" text NOT NULL,
-	"valid_until" timestamp DEFAULT now() + INTERVAL '15 minutes',
+	"valid_until" timestamp DEFAULT now() + INTERVAL '15 minutes' NOT NULL,
 	CONSTRAINT "telegram_link_tokens_id_unique" UNIQUE("id"),
 	CONSTRAINT "telegram_link_tokens_user_unique" UNIQUE("user"),
 	CONSTRAINT "telegram_link_tokens_token_unique" UNIQUE("token")
@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"balance" integer DEFAULT 0 NOT NULL,
 	"payment_link" text,
 	"telegram_id" text,
+	"telegram_username" text,
 	CONSTRAINT "users_id_unique" UNIQUE("id"),
 	CONSTRAINT "users_email_unique" UNIQUE("email"),
 	CONSTRAINT "users_telegram_id_unique" UNIQUE("telegram_id")
