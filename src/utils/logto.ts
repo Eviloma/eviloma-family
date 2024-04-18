@@ -10,11 +10,11 @@ const config = {
   appId: env.LOGTO_APP_ID,
   appSecret: env.LOGTO_APP_SECRET,
   endpoint: env.LOGTO_ENDPOINT,
-  baseUrl: env.VERCEL_URL ?? env.BASE_URL,
+  baseUrl: env.BASE_URL,
   cookieSecret: env.LOGTO_COOKIE_SECRET,
   cookieSecure: env.NODE_ENV === "production",
   scopes: ["email", "admin:family"],
-  resources: [`${env.VERCEL_URL ?? env.BASE_URL}/api`],
+  resources: [`${env.BASE_URL}/api`],
 };
 
 const logtoClient = new LogtoClient(config);

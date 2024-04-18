@@ -1,4 +1,3 @@
-import { vercel } from "@t3-oss/env-core/presets";
 import { createEnv } from "@t3-oss/env-nextjs";
 import { join, map } from "lodash";
 import { type ZodError, z } from "zod";
@@ -29,7 +28,6 @@ export const env = createEnv({
     NEXT_PUBLIC_TELEGRAM_BOT_LINK: process.env.NEXT_PUBLIC_TELEGRAM_BOT_LINK,
   },
   emptyStringAsUndefined: true,
-  extends: [vercel],
   onValidationError: (error: ZodError) => {
     throw new Error(
       `❌ Invalid environment variables:\n\n${join(
