@@ -16,6 +16,7 @@ import ReactQueryProvider from "@/components/ReactQueryProvider";
 import NavBar from "@/components/navbar/NavBar";
 import { META } from "@/utils/consts";
 import theme from "@/utils/theme";
+import { Suspense } from "react";
 
 const raleway = Raleway({ subsets: ["cyrillic-ext", "latin-ext"] });
 
@@ -80,7 +81,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <MantineProvider theme={theme} defaultColorScheme="dark" forceColorScheme="dark" withGlobalClasses>
             <Notifications position="top-right" />
             <NavigationProgress />
-            <LogtoErrorNotificator />
+            <Suspense>
+              <LogtoErrorNotificator />
+            </Suspense>
             <NavBar />
             {children}
           </MantineProvider>
