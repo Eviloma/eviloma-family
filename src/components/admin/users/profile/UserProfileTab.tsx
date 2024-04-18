@@ -1,5 +1,4 @@
 import { Button, Grid, TabsPanel } from "@mantine/core";
-import React from "react";
 
 import type User from "@/types/user";
 

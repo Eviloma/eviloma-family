@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { map } from "lodash";
-import React from "react";
 
 import type Subscription from "@/types/subscription";
 import QueryRequest from "@/utils/query-request";

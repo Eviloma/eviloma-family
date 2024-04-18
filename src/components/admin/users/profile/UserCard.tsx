@@ -3,7 +3,7 @@
 import { Button, Card, CardSection, Divider, Flex, Input, Text, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import QueryRequest from "@/utils/query-request";
 

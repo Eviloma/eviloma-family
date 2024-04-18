@@ -1,6 +1,5 @@
 import { Box, Flex, Group, NumberFormatter, Stack, Text, Title } from "@mantine/core";
 import dayjs from "dayjs";
-import React from "react";
 
 import CategoryIcon from "@/components/CategoryIcon";
 import type Subscription from "@/types/subscription";

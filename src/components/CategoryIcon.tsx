@@ -1,5 +1,4 @@
 import { Box, type MantineColor, type StyleProp } from "@mantine/core";
-import React from "react";
 
 import type { SUBSCRIPTION_CATEGORIES, TRANSACTION_CATEGORIES } from "@/utils/consts";
 

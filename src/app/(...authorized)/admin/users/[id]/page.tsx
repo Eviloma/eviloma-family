@@ -2,7 +2,6 @@ import { ActionIcon, Flex, Title } from "@mantine/core";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next/types";
-import React from "react";
 
 import UserSettings from "@/components/admin/users/UserSettings";
 

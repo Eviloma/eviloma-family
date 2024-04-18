@@ -4,7 +4,7 @@ import { Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Unlink } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import QueryRequest from "@/utils/query-request";
 

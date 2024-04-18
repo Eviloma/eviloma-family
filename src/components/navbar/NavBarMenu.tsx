@@ -1,7 +1,6 @@
 import { Menu, MenuDivider, MenuDropdown, MenuItem, MenuLabel, MenuTarget } from "@mantine/core";
 import { CalendarClock, LayoutDashboard, ReceiptText, UserRoundCog } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 import isAdmin from "@/utils/is-admin";
 

@@ -1,5 +1,4 @@
 import { Banknote, CircleHelp } from "lucide-react";
-import React from "react";
 
 import SpotifyIcon from "@/icons/Spotify";
 import YoutubeIcon from "@/icons/Youtube";

@@ -25,7 +25,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { map } from "lodash";
 import { CirclePlus } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
 
 import { SUBSCRIPTION_CATEGORIES } from "@/utils/consts";

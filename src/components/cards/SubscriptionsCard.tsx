@@ -8,7 +8,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { map } from "lodash";
 import { Boxes } from "lucide-react";
-import React from "react";
 
 import type { ExtendedUser } from "@/types/user";
 import QueryRequest from "@/utils/query-request";

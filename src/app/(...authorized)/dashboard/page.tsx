@@ -1,7 +1,6 @@
 import { Grid } from "@mantine/core";
 import { dehydrate } from "@tanstack/react-query";
 import type { Metadata } from "next/types";
-import React from "react";
 
 import Hydrate from "@/components/Hydrate";
 import BalanceCard from "@/components/cards/BalanceCard";

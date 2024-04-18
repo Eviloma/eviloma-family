@@ -6,7 +6,7 @@ import { notifications } from "@mantine/notifications";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { filter, find, includes, map } from "lodash";
 import { Plus } from "lucide-react";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import type Subscription from "@/types/subscription";
 import QueryRequest from "@/utils/query-request";
