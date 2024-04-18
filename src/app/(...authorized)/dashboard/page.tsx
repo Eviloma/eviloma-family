@@ -10,7 +10,6 @@ import TelegramCard from "@/components/cards/TelegramCard";
 import TransactionsCard from "@/components/cards/TransactionsCard";
 import getQueryClient from "@/utils/get-query-client";
 import { getLogtoContext } from "@/utils/logto";
-import QueryRequest from "@/utils/query-request";
 
 const PAGE_TITLE = "Інформаційна дошка";
 export const metadata: Metadata = {
@@ -24,14 +23,9 @@ export default async function Page() {
   const { userInfo } = await getLogtoContext({ fetchUserInfo: true });
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["user"],
-    queryFn: () => QueryRequest({ link: "/api/user", method: "GET" }),
-    staleTime: 10 * 1000,
-  });
 
   if (!userInfo) {
-    return null;
+    return <div />;
   }
   return (
     <Hydrate state={dehydrate(queryClient)}>
