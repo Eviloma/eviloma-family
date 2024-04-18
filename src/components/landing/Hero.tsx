@@ -1,6 +1,5 @@
 import { Button, Stack, Text, Title } from "@mantine/core";
 import Link from "next/link";
-import React from "react";
 
 import { getLogtoContext } from "@/utils/logto";
 

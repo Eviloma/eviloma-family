@@ -1,5 +1,4 @@
 import type { GetServerSideProps } from "next/types";
-import React from "react";
 
 import BaseErrorPage from "@/components/errorPages/BaseErrorPage";
 

@@ -1,5 +1,5 @@
 import { Group, Text } from "@mantine/core";
-import React, { type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface IProps {
   icon: ReactNode;

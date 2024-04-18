@@ -1,4 +1,4 @@
-import React, { memo, type SVGProps } from "react";
+import { type SVGProps, memo } from "react";
 
 function SpotifySvgComponent(props: SVGProps<SVGSVGElement>) {
   return (

@@ -3,7 +3,6 @@
 import { MenuItem } from "@mantine/core";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 import { signOut } from "@/utils/logto";
 

@@ -1,6 +1,5 @@
 import { Group, Title } from "@mantine/core";
 import Image from "next/image";
-import React from "react";
 
 import { getLogtoContext } from "@/utils/logto";
 

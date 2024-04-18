@@ -3,7 +3,6 @@
 import { Button, Card, GridCol, NumberFormatter, Skeleton, Stack, Text, type TextProps } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { Coins, CreditCard } from "lucide-react";
-import React from "react";
 
 import type { ExtendedUser } from "@/types/user";
 import QueryRequest from "@/utils/query-request";

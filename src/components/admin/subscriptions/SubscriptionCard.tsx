@@ -1,7 +1,6 @@
 import { Box, Card, Flex, Group, NumberFormatter, Stack, Text, Title } from "@mantine/core";
 import dayjs from "dayjs";
 import { CalendarClock, Coins } from "lucide-react";
-import React from "react";
 
 import CategoryIcon from "@/components/CategoryIcon";
 import type Subscription from "@/types/subscription";

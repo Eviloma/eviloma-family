@@ -4,7 +4,6 @@ import { ActionIcon, Avatar, Card, GridCol, Group, Skeleton, Stack, Text, Toolti
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { RefreshCcw } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 import TelegramIcon from "@/icons/Telegram";
 import type { ExtendedUser } from "@/types/user";

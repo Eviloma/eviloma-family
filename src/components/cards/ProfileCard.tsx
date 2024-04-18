@@ -3,7 +3,6 @@
 import type { UserInfoResponse } from "@logto/node";
 import { Avatar, Button, Card, CopyButton, Flex, GridCol, Stack, Text } from "@mantine/core";
 import { Clipboard, ClipboardCheck, UserRound } from "lucide-react";
-import React from "react";
 
 import CardTitle from "./items/CardTitle";
 

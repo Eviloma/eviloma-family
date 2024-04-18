@@ -5,7 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import type Subscription from "@/types/subscription";
 import type User from "@/types/user";

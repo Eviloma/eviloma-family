@@ -4,7 +4,6 @@ import { Box, Center, Skeleton, Tabs } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { Boxes, ReceiptText, UserRoundCog } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
 
 import ErrorAlert from "@/components/alerts/ErrorAlert";
 import type User from "@/types/user";

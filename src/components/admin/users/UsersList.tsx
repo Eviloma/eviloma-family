@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Pencil } from "lucide-react";
 import { DataTable, type DataTableColumn } from "mantine-datatable";
 import Link from "next/link";
-import React from "react";
 
 import type User from "@/types/user";
 import QueryRequest from "@/utils/query-request";

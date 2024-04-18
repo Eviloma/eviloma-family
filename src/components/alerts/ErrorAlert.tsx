@@ -1,6 +1,5 @@
 import { Alert } from "@mantine/core";
 import { CircleX } from "lucide-react";
-import React from "react";
 
 interface IProps {
   title: string;

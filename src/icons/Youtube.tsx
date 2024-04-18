@@ -1,4 +1,4 @@
-import React, { memo, type SVGProps } from "react";
+import { type SVGProps, memo } from "react";
 
 function YoutubeSvgComponent(props: SVGProps<SVGSVGElement>) {
   return (

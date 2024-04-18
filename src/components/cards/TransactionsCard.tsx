@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { map } from "lodash";
 import { FileStack, ReceiptText } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 import type { ExtendedUser } from "@/types/user";
 import QueryRequest from "@/utils/query-request";

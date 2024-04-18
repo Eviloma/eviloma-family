@@ -4,7 +4,7 @@ import { Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import type TelegramPOST from "@/types/telegram-post";
 import QueryRequest from "@/utils/query-request";

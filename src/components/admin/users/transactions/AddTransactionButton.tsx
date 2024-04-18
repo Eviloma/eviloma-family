@@ -23,7 +23,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { map } from "lodash";
 import { Plus } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
 
 import { TRANSACTION_CATEGORIES } from "@/utils/consts";
