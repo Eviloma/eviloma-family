@@ -1,5 +1,5 @@
-import React from 'react';
+import Hero from "@/components/landing/Hero";
 
-export default function Home() {
-  return <main className='text-8xl text-red-400'>Test</main>;
+export default async function Home() {
+  return <Hero />;
 }
