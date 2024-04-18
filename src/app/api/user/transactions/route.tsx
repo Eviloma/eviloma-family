@@ -29,7 +29,10 @@ export async function GET(req: NextRequest): ApiWithMeta<Transaction[] | null> {
       .offset((page - 1) * 10);
 
     return NextResponse.json(
-      { data: transactions.length === 0 ? null : transactions, meta: { total: countResult[0]?.count ?? 0, page } },
+      {
+        data: transactions.length === 0 ? null : transactions,
+        meta: { total: countResult[0]?.count ?? 0, page, totalPage: Math.ceil((countResult[0]?.count ?? 0) / 10) },
+      },
       { status: 200 },
     );
   } catch (err) {

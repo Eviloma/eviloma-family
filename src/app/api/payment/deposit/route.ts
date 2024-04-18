@@ -2,7 +2,7 @@ import { eq, sql } from "drizzle-orm";
 import { StatusCodes } from "http-status-codes";
 import { type NextRequest, NextResponse } from "next/server";
 
-import { ApiErrorClass, ForbiddenError } from "@/classes/ApiError";
+import { ApiErrorClass, ForbiddenError, UserNotFoundError } from "@/classes/ApiError";
 import db from "@/db";
 import { transactions, users } from "@/db/schema";
 import apiErrorHandler from "@/utils/api/api-error-handler";
@@ -20,6 +20,12 @@ export async function POST(req: NextRequest) {
 
     if (!id || !suma) {
       throw new ApiErrorClass(StatusCodes.BAD_REQUEST, "Один або декілька полів не заповнено");
+    }
+
+    const existUser = await db.query.users.findFirst({ where: eq(users.id, id) });
+
+    if (!existUser) {
+      throw UserNotFoundError();
     }
 
     await db.insert(transactions).values({

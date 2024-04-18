@@ -1,6 +1,5 @@
 import { Title } from "@mantine/core";
 import type { Metadata } from "next/types";
-import React from "react";
 
 import UserTransactions from "@/components/UserTransactions";
 
