@@ -1,10 +1,10 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { ForbiddenError, UserNotFoundError } from "@/classes/ApiError";
 import db from "@/db";
-import { users } from "@/db/schema";
+import { transactions, users } from "@/db/schema";
 import apiErrorHandler from "@/utils/api/api-error-handler";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
@@ -23,7 +23,10 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             subscription: true,
           },
         },
-        transactions: true,
+        transactions: {
+          limit: 5,
+          orderBy: desc(transactions.date),
+        },
       },
       where: eq(users.telegramID, params.id),
     });
