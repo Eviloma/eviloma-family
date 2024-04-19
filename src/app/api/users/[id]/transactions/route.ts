@@ -84,9 +84,12 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       throw new ApiErrorClass(StatusCodes.INTERNAL_SERVER_ERROR, "Помилка створення транзакції");
     }
 
-    await db.update(users).set({
-      balance: sql`balance + ${suma * 100}`,
-    });
+    await db
+      .update(users)
+      .set({
+        balance: sql`balance + ${suma * 100}`,
+      })
+      .where(eq(users.id, params.id));
 
     return NextResponse.json({ transaction: transaction[0] }, { status: 200 });
   } catch (error) {
