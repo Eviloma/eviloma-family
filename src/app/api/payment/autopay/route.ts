@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
           await tx
             .update(subscriptionsSchema)
             .set({
-              date: dayjs()
+              date: dayjs(subscription.date)
                 .add(1, "month")
                 .set("hours", 0)
                 .set("minutes", 0)
