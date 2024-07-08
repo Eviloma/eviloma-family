@@ -35,8 +35,7 @@ const schema = z.object({
   title: z.string().min(3, { message: "Назва підписки не може бути менше 3-х символ" }),
   category: z.enum(TRANSACTION_CATEGORIES),
   date: z
-    .date({ required_error: "Оберіть дату платежу", invalid_type_error: "Невірний формат дати платежу" })
-    .min(dayjs().subtract(1, "day").toDate(), "Дата повинна бути більшою за поточну"),
+    .date({ required_error: "Оберіть дату платежу", invalid_type_error: "Невірний формат дати платежу" }),
   suma: z.number(),
 });
 
@@ -144,7 +143,6 @@ export default function AddTransactionButton({ id }: IProps) {
               />
               <DateTimePicker
                 label="Дата"
-                minDate={dayjs().toDate()}
                 valueFormat="DD MMMM YYYY HH:mm:ss"
                 dropdownType="modal"
                 locale="uk"
