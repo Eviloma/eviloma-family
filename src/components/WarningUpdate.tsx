@@ -4,12 +4,12 @@ import { TriangleAlert } from "lucide-react";
 
 export default function WarningUpdate() {
   const now = dayjs();
-  if (now.isAfter(dayjs("2024-04-21"))) {
+  if (now.isAfter(dayjs("2024-09-03"))) {
     return null;
   }
   return (
     <Alert variant="light" color="yellow" title="Увага!" icon={<TriangleAlert />} mb="sm">
-      Дані в процесі перенесення. Якщо ви замітили помилки в перенесених даних, будь ласка зверніться до адміністратора.
+      Увага! З 1 вересня 2024 року, підписки Spotify Premium 1st/1stx3/1st 2024/2nd подорожчають на 10/30/10/10 грн відповідно!
     </Alert>
   );
 }
