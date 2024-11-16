@@ -26,7 +26,7 @@ export default function BalanceCard() {
 
   async function deposit() {
     navigator.clipboard.writeText(data?.id ?? "").then(() => {
-      window.open(data?.paymentLink ?? "", "_blank", "noreferrer");
+      window.open(`${data?.paymentLink}?t=${data?.id}`, "_blank", "noreferrer");
     });
   }
 
